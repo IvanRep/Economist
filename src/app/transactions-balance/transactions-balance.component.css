@@ -1,0 +1,104 @@
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 1fr;
+
+    border: solid var(--main-color);
+    border-radius: 20px;
+    padding: 5%;
+    margin: 7% 5% 5% 5%;
+
+
+    transition: 1.4s;
+    -moz-transition: 1.4s;
+    -o-transition: 1.4s;
+    -webkit-transition: 1.4s;
+}
+main>div {
+    display: grid;
+    grid-template-rows: 3fr 1fr 1fr 1fr;
+}
+#balance {
+   color: var(--main-color);
+   font-weight: bold;
+   font-size: calc(4em + 1vw); 
+   border-bottom: solid var(--main-color);
+   text-align: center;
+
+   margin-bottom: 6%;
+}
+
+div#transactions, div#amountSpend {
+    color: var(--main-color);
+    font-size: calc(1.5em + 1vw);
+}
+
+div#enteredAmount {
+    color: var(--deposit-color);
+    font-size: calc(1.5em + 1vw);
+}
+
+button {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-radius: 50px;
+    border: solid 4px var(--main-color);
+    border-color: var(--main-color);
+    background-color: white;
+    margin: 8% 12% 8% 12%;
+    padding: 3%;
+
+    align-items: center;
+
+    color: var(--main-color);
+    font-size: calc(2em + 0.5vw);
+    font-weight: bolder;
+
+}
+button>span {
+    position: absolute;
+    font-size: calc(1em + 1vw);
+}
+button:hover {
+    border-right: solid 8px;
+}
+
+/* NOT SPREADED */
+main.notSpreaded {
+    grid-row-start: 4;
+    grid-row-end: 7;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr;
+}
+main.notSpreaded>div:first-child {
+    grid-template-rows: 1fr 1fr;
+}
+.notSpreaded div#balance {
+    border-bottom: none;
+    font-size: calc(2.5em + 1vw);
+    text-align: left;
+    padding: 0%;
+    margin: 0%;
+}
+.notSpreaded div#transactions {
+    font-size: calc(1.5em + 0.5vw);
+}
+
+.notSpreaded div#enteredAmount, .notSpreaded div#amountSpend, .notSpreaded button>div {
+    display: none !important;
+}
+.notSpreaded>button {
+    margin: 0%;
+    border-radius: 100%;
+
+}
+
+.notSpreaded>button>span {
+    position: relative;
+    align-self: center;
+}
+.notSpreaded>button:hover {
+    border-right: solid 7px;
+    border-bottom: solid 7px;
+}
+

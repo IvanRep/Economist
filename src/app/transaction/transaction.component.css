@@ -1,0 +1,75 @@
+#transaction {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+
+    border: solid RGB(188, 65, 67);
+    border-radius: 50px;
+    margin: 5%;
+    overflow: hidden;
+    padding-bottom: 2%;
+}
+#transaction>div:nth-child(1) {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
+
+    padding: 2% 10%;
+}
+.col {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+}
+#type {
+    display: flex;
+    flex-direction: row;
+    flex: 2 1 auto;
+
+    font-size: 3vw;
+    font-weight: bolder;
+    color: var(--main-color);
+}
+#user {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
+    height: 60%;
+    
+    font-size: 2vw;
+    color: var(--main-color);
+
+}
+
+#amount {
+    display: flex;
+    flex-direction: column;
+    flex: 2 1 auto;
+    align-items: flex-end;
+    justify-content: center;
+    font-size: calc(2.1em + 0.5vw);
+    font-weight: bold;
+    color: var(--main-color);
+}
+#concept {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
+    padding: 1% 5%;
+
+    color: white;
+    background-color: var(--concept-color);
+    font-size: calc(1em + 0.5vw);
+}
+.deposit {
+    border-color: var(--deposit-color) !important;
+}
+.deposit div{
+    color: var(--deposit-color) !important;
+}
+.deposit  #concept{
+    color: white !important;
+    background-color: var(--deposit-concept-color);
+}
+
+

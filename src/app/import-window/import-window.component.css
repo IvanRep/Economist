@@ -1,0 +1,52 @@
+main {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+    height: 55vh;
+}
+button {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    padding: 5%;
+    color: var(--main-color);
+    font-size: calc(1em + 0.5vw);
+    background-color: white;
+    border-style: solid;
+    border-width: 0px 0px 2px 0px;
+    border-color: var(--main-color);
+
+}
+button:hover {
+
+    border-bottom: solid 4px;
+}
+
+main::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+main::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+    display: none;
+}
+main::-webkit-scrollbar:vertical {
+    width:10px;
+    
+}
+main::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+main::-webkit-scrollbar-thumb {
+    background-color: var(--main-color);
+    border: 1px solid #f1f2f3;
+    border-radius: 20px;
+
+}
+main::-webkit-scrollbar-track {
+    border-radius: 10px;  
+}
+main {
+    /*Estilos estándar experimentales (Principalmente Firefox)*/
+    scrollbar-color: var(--main-color);
+    scrollbar-width: thin;
+}

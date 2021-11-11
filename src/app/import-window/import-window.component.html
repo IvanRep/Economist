@@ -1,0 +1,5 @@
+<main>
+    <div *ngFor="let backup of backups">
+        <button>{{backup.split('-')[0].replaceAll('_', '/')+" "+backup.split('-')[1].replaceAll('_', ':')}}</button>
+    </div>
+</main>

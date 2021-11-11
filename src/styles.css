@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --main-color: RGB(188, 65, 67);
+    --concept-color: RGB(231, 189, 191);
+    --deposit-color: RGB(20, 148, 29);
+    --deposit-concept-color: RGB(164, 242, 174);
+}
+html, body {height: 100vh; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: hidden;}
+
+app-root {
+    display: grid;
+    grid-template-rows: 30fr 400fr;
+    grid-template-columns: 1fr;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: RGBA(188, 65, 67,10%) !important;
+}

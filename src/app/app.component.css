@@ -1,0 +1,79 @@
+header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr 0.2fr;
+    grid-template-rows: 1fr;
+
+    border-bottom: solid var(--main-color);
+    align-items: center;
+}
+header>button {
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 85%;
+    color: var(--main-color);
+    font-size: calc(0.5em + 0.5vw);
+    font-weight: bold;
+    background-color: white;
+    border: none;
+    border-right: solid 3px var(--main-color);
+    align-items: center;
+}
+header>button>span {
+    position: absolute;
+    font-size: calc(1em + 1vw);
+}
+
+header>div {
+    align-items: center;
+    text-align: end;
+    padding-right: 20%;
+
+    font-size: calc(2em + 1vw);
+    font-weight: bold;
+    color: var(--main-color);
+}
+header>span {
+    color: var(--main-color);
+    font-size: calc(1.5em + 1vw);
+    cursor: pointer;
+}
+header>span::after {
+    align-content: center;
+    font-size: 0.5em;
+    content: '\25BC';
+}
+main {
+    display: grid;
+    grid-template-columns: 1fr 3fr 4fr;
+}
+
+#wAction {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    height: 100vh;
+    
+}
+nav {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 10fr;
+
+    border-right: solid var(--main-color);
+}
+nav>button {
+    margin: 5%;
+    background-color: white;
+    color: var(--main-color);
+    border: solid var(--main-color);
+    border-radius: 50px;
+}
+nav>button>span {
+    font-size: calc(2em + 0.5vw);
+}
+button:hover {
+    border-right: solid 7px !important;
+}
+main>div:last-child {
+    max-height: 90vh;
+}

@@ -1,0 +1,22 @@
+<div id="transaction" [ngClass]="{ 'deposit' : getType()==transactionType.Deposit}">
+    <div>
+                
+        <div class="col">
+            <div id="type">{{getType()}}</div>
+            <div id="user">{{getUser()}}</div>
+
+        </div >
+
+        <div id="amount">
+            {{getAmount()}} €
+        </div>    
+
+    </div>
+    <div id="concept">
+
+        Concepto: {{getConcept()}}
+
+    </div>
+    
+    
+</div>
