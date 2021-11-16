@@ -1,0 +1,12 @@
+<main>
+    <div>
+        <input type="text" [(ngModel)]="amount" 
+        (keydown)="writeAmount($event)"
+        placeholder="0.00"/>
+        <div (click)="focusAmount()">€</div>
+    </div>
+    <div>
+        <button (mousedown)="addAmount()" (mouseup)="addUp()">+</button>
+        <button (mousedown)="subtractAmount()" (mouseup)="subtractUp()">-</button>
+    </div>
+</main>

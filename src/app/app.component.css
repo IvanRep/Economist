@@ -49,10 +49,25 @@ main {
 
 #wAction {
     display: grid;
-    grid-template-rows: 1fr;
+    grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr;
-    height: 100vh;
+    height: 92vh;
+    max-height: 92vh;
     
+}
+#action {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+.vacio {
+    display: none !important;
+}
+#balance {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    align-items: end;
 }
 nav {
     display: grid;
@@ -74,6 +89,6 @@ nav>button>span {
 button:hover {
     border-right: solid 7px !important;
 }
-main>div:last-child {
-    max-height: 90vh;
+main, main div, nav {
+    max-height: 92vh;
 }

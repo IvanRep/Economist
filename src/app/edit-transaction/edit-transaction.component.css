@@ -1,0 +1,35 @@
+main {
+    display: grid;
+    grid-template-rows: 1fr 3fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    border: solid var(--main-color);
+    border-radius: 20px;
+    margin: 7% 5% 0% 5%;
+    max-height: 90vh;
+
+    overflow: hidden;
+
+
+    transition: 1.4s;
+    -moz-transition: 1.4s;
+    -o-transition: 1.4s;
+    -webkit-transition: 1.4s;
+}
+app-type-selector {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+app-amount-selector {
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    padding: 10% 30%;
+}
+
+main>input {
+    grid-column-start: 2;
+}

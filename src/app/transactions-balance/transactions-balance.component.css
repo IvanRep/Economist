@@ -7,6 +7,7 @@ main {
     border-radius: 20px;
     padding: 5%;
     margin: 7% 5% 5% 5%;
+    max-height: 90vh;
 
 
     transition: 1.4s;
@@ -21,7 +22,7 @@ main>div {
 #balance {
    color: var(--main-color);
    font-weight: bold;
-   font-size: calc(4em + 1vw); 
+   font-size: calc(2em + 2vw); 
    border-bottom: solid var(--main-color);
    text-align: center;
 
@@ -30,12 +31,12 @@ main>div {
 
 div#transactions, div#amountSpend {
     color: var(--main-color);
-    font-size: calc(1.5em + 1vw);
+    font-size: calc(1em + 1vw);
 }
 
 div#enteredAmount {
     color: var(--deposit-color);
-    font-size: calc(1.5em + 1vw);
+    font-size: calc(1em + 1vw);
 }
 
 button {

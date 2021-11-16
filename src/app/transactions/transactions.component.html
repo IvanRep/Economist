@@ -1,6 +1,6 @@
 <main>
     <div *ngFor="let transaction of transactions">
-        <app-transaction (amountEmitter)="setBalance($event)" [id]="transaction.getId()"></app-transaction>
+        <app-transaction (amountEmitter)="setBalance($event)" [id]="transaction.getId()" (click)="selectTransaction($event)"></app-transaction>
     </div>
     
 </main>

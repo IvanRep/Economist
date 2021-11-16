@@ -22,15 +22,15 @@ export class TransactionsComponent implements OnInit {
     this.transactions = [
     ];
 
-    this.prueba();
+    this.getTransactions();
   }
 
-  prueba() {
+  getTransactions() {
     
-  this.transactionsService.getTransactionsID().subscribe(result => this.crearTransacciones(result));
+    this.transactionsService.getTransactionsID().subscribe(result => this.createTransactions(result));
   }
 
-  crearTransacciones(ids:any) {
+  createTransactions(ids:any) {
     for (let id of ids) {
       this.transactions.push(new Transaction(id.id,TransactionType.All, '00/00/0000','concept','user',0));
     }
@@ -44,6 +44,12 @@ export class TransactionsComponent implements OnInit {
       this.emitAmountSpend(Math.abs(amount));
     }
 
+  }
+
+  selectTransaction(transaction:Event) {
+    alert(transaction.target);
+    if (transaction.target instanceof HTMLDivElement)
+      (<HTMLDivElement>transaction.target).parentElement?.parentElement?.remove();
   }
 
   emitTransactionsVolume(volume:number) {

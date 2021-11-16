@@ -4,11 +4,12 @@ main {
 }
 
 .alpha {
-    min-width: 100%;
-    position: absolute;
+    width: 100%;
+    position: fixed;
     bottom: 0%;
     height: 9vh;
     background: linear-gradient(to bottom,rgba(255,255,255,10%), rgba(255,255,255,70%), rgba(255,255,255,100%));
+
 }
 
 main::-webkit-scrollbar {

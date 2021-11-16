@@ -10,6 +10,8 @@ import { ImportWindowComponent } from './import-window/import-window.component';
 import { TransactionComponent } from './transaction/transaction.component';
 import { TransactionsBalanceComponent } from './transactions-balance/transactions-balance.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { TypeSelectorComponent } from './type-selector/type-selector.component';
+import { AmountSelectorComponent } from './amount-selector/amount-selector.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { TransactionsComponent } from './transactions/transactions.component';
     TransactionsBalanceComponent,
     TransactionsComponent,
     TransactionComponent,
+    TypeSelectorComponent,
+    AmountSelectorComponent,
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule

@@ -5,8 +5,13 @@
     --deposit-color: RGB(20, 148, 29);
     --deposit-concept-color: RGB(164, 242, 174);
 }
-html, body {height: 100vh; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: hidden;}
+html, body, app-root {
+    height: 100vh; 
+    max-height: 100vh; 
+    max-width: 100vw;
+
+}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: auto;}
 
 app-root {
     display: grid;
