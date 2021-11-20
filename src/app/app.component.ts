@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActionWindow } from './enums/ActionWindow.model';
+import { TransactionsComponent } from './transactions/transactions.component';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +15,42 @@ export class AppComponent {
   transactionsVolume:number = 0;
   amountSpend:number = 0;
   enteredAmount:number = 0;
+  order:string = 'date';
+  orderDirection:string = 'asc';
 
   action:ActionWindow = ActionWindow.None;
+
+  openOrderBy() {
+    const orderBy = document.querySelector('.order-by');
+    if (orderBy?.classList.contains('open')) {
+      orderBy.classList.remove('open');
+    } else {
+      orderBy?.classList.add('open');
+    }
+  }
+
+  orderBy(order: string, transactions:TransactionsComponent) {
+    switch(order) {
+      case 'date':
+        this.order = 'date';
+        break;
+
+      case 'type':
+        this.order = 'type';
+        break;
+      case 'amount':
+        this.order = 'amount';
+        break;
+      case 'user':
+        this.order = 'user';
+        break;
+    }
+
+    this.amountSpend = 0;
+    this.enteredAmount = 0;
+    this.setTransactionsVolume(0);
+    transactions.getTransactions();
+  }
 
   getAction():ActionWindow {
     return this.action;

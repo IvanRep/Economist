@@ -1,22 +1,27 @@
-<div id="transaction" [ngClass]="{ 'deposit' : getType()==transactionType.Deposit}">
-    <div>
-                
-        <div class="col">
-            <div id="type">{{getType()}}</div>
-            <div id="user">{{getUser()}}</div>
+<section>
+    <div id="transaction" [ngClass]="{ 'deposit' : getType()==transactionType.Deposit}" (click)="selectTransaction($event)">
+        <div>
+                    
+            <div class="col">
+                <div id="type">{{getType()}}</div>
+                <div id="user">{{getUser()}}</div>
 
-        </div >
+            </div >
 
-        <div id="amount">
-            {{getAmount()}} €
-        </div>    
+            <div id="amount">
+                {{getAmount()}}<span>€</span>
+            </div>    
+
+        </div>
+        <div id="concept">
+
+            Concepto: {{getConcept()}}
+
+        </div>
 
     </div>
-    <div id="concept">
-
-        Concepto: {{getConcept()}}
-
+    <div class="options">
+        <button><span class="material-icons">edit</span></button>
+        <button><span class="material-icons">delete</span></button>
     </div>
-    
-    
-</div>
+<section>

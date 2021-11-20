@@ -2,7 +2,8 @@
     <div>
         <input type="text" [(ngModel)]="amount" 
         (keydown)="writeAmount($event)"
-        placeholder="0.00"/>
+        (change)="sendAmount()"
+        placeholder="0000.00"/>
         <div (click)="focusAmount()">€</div>
     </div>
     <div>

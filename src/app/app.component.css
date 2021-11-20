@@ -42,6 +42,51 @@ header>span::after {
     font-size: 0.5em;
     content: '\25BC';
 }
+
+.order-by {
+    position: absolute;
+    display: grid;
+    grid-template-columns: 12.5vw 12.5vw 12.5vw 12.5vw;
+    border: solid 3px var(--main-color);
+    border-radius: 30px;
+    background-color: var(--main-color);
+
+    width: 50vw;
+    right: .5vw;
+    top: 5.2rem;
+
+    z-index: 2;
+
+    visibility: hidden;
+    opacity: 0;
+
+    transition: 1s;
+}
+.order-by.open {
+    visibility: visible;
+    opacity: 1;
+}
+.order-by>button {
+
+    display: grid;
+    grid-template-rows: 1.5fr 1fr ;
+    border: solid 2px white;
+    border-radius: 100%;
+    color: white;
+    background-color: var(--main-color);
+    justify-self: center;
+
+    font-size: .5rem;
+    width: 5vw;
+    height: 5vw;
+
+}
+.order-by>button>span {
+    color: white;
+    align-self: flex-end;
+}
+
+
 main {
     display: grid;
     grid-template-columns: 1fr 3fr 4fr;

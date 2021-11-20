@@ -33,6 +33,7 @@ export class TransactionComponent implements OnInit {
     this.transactionsService.getTransaction(this.id).subscribe(result => this.getTransaction(result));
 
   }
+
   emitAmount() {
       
       this.amountEmitter.emit(
@@ -48,6 +49,19 @@ export class TransactionComponent implements OnInit {
     this.amount = parseFloat(transaction.importe);
 
     this.emitAmount();
+  }
+
+  selectTransaction(target:Event) {
+    const transaction = (<HTMLDivElement>target.currentTarget);
+    if (transaction.id == 'transaction') {
+        if (transaction.classList.contains('selected')) {
+            transaction.classList.remove('selected');
+            transaction.parentElement?.querySelector('.options')?.classList.remove('selected');
+        } else {
+            transaction.classList.add('selected');
+            transaction.parentElement?.querySelector('.options')?.classList.add('selected');
+        }
+    }
   }
 
   translateType(type:string) {

@@ -1,18 +1,21 @@
 main {
     display: grid;
-    grid-template-columns: 4fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     align-items: center;
 }
 main>div:first-child {
+    grid-column-start: 2;
+    grid-column-end: 5;
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 3fr 1fr;
     border-bottom: solid 4px var(--main-color);
     color: var(--main-color);
     font-weight: bold;
-    font-size: calc(1em + 2vw);
+    font-size: calc(1em + 2.5vw);
     padding-right: 1%;
     margin-right: 10%;
+    width: calc(150px + 10vw);
 }
 
 main>div:first-child>input {
@@ -22,8 +25,8 @@ main>div:first-child>input {
     color: var(--main-color);
     font-weight: bold;
     font-size: 1em;
-    width: 100%;
-    text-align: center;
+    width: calc(100px + 10vw);
+    text-align: right;
 }
 
 main>div:last-child {
@@ -35,21 +38,34 @@ main>div:last-child {
 button:first-child {
 
     border-color: var(--main-color);
-    border-bottom: none;
-    border-radius: 30%;
+    border-bottom: solid 1px;
+    border-top-left-radius: 30%;
+    border-top-right-radius: 30%;
     background-color: white;
     color: var(--main-color);
     font-size: calc(1em + 0.5vw);
     font-weight: bold;
+
+    width: 50px;
+    justify-self: center;
 
 }
 button:last-child {
 
     border-color: var(--main-color);
-    border-top: none;
-    border-radius: 30%;
+    border-top: solid 1px;
+    border-bottom-left-radius: 30%;
+    border-bottom-right-radius: 30%;
     background-color: white;
     color: var(--main-color);
     font-size: calc(1em + 0.5vw);
     font-weight: bold;
+
+    width: 50px;
+    justify-self: center;
+}
+
+::placeholder {
+    color: var(--main-color);
+    opacity: 1;
 }

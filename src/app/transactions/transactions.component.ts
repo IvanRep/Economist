@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TransactionType } from '../enums/TransactionType.model';
 import { TransactionsService } from '../transactions.service';
 import { Transaction } from './transaction.model';
@@ -17,6 +17,9 @@ export class TransactionsComponent implements OnInit {
   @Output() transactionsVolumeEmitter = new EventEmitter<number>();
   @Output() enteredAmountEmitter = new EventEmitter<number>();
   @Output() amountSpendEmitter = new EventEmitter<number>();
+
+  @Input() order = 'date';
+  @Input() orderDirection = 'asc';
   constructor(private transactionsService:TransactionsService) { 
     this.title = 'Transacciones Realizadas';
     this.transactions = [
@@ -26,7 +29,7 @@ export class TransactionsComponent implements OnInit {
   }
 
   getTransactions() {
-    
+    this.transactions = [];
     this.transactionsService.getTransactionsID().subscribe(result => this.createTransactions(result));
   }
 
@@ -44,12 +47,6 @@ export class TransactionsComponent implements OnInit {
       this.emitAmountSpend(Math.abs(amount));
     }
 
-  }
-
-  selectTransaction(transaction:Event) {
-    alert(transaction.target);
-    if (transaction.target instanceof HTMLDivElement)
-      (<HTMLDivElement>transaction.target).parentElement?.parentElement?.remove();
   }
 
   emitTransactionsVolume(volume:number) {

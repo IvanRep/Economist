@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-amount-selector',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AmountSelectorComponent implements OnInit {
 
+  @Output() amountEmitter = new EventEmitter<string>(); 
   amount:string = "";
 
   adding:boolean = false;
@@ -18,17 +19,19 @@ export class AmountSelectorComponent implements OnInit {
   }
 
   writeAmount(key:KeyboardEvent) {
-    if (key.key == "Backspace") {
-      return;
-    } else if (key.key == "," || key.key == ".") {
+    
+    if (key.key == "," || key.key == ".") {
       this.amount += ',';
       return false;
-    } else if (!key.key.match("[0-9]")) {
+    } else if (!key.key.match("[0-9]") && key.key != 'Backspace') {
 
       return false;
     }
     return;
+  }
 
+  sendAmount() {
+    this.amountEmitter.emit(this.amount);
   }
 
   async addAmount() {

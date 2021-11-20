@@ -1,13 +1,24 @@
+section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 5% 0%;
+}
 #transaction {
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
 
-    border: solid RGB(188, 65, 67);
+    border: solid var(--main-color);
     border-radius: 50px;
-    margin: 5%;
+    
     overflow: hidden;
     padding-bottom: 2%;
+
+    transition: 2s;
+}
+section:first-of-type {
+    margin-top: 0%;
 }
 #transaction>div:nth-child(1) {
     display: flex;
@@ -43,8 +54,9 @@
 
 #amount {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex: 2 1 auto;
+    flex-wrap: nowrap;
     align-items: flex-end;
     justify-content: center;
     font-size: calc(2.1em + 0.5vw);
@@ -71,5 +83,52 @@
     color: white !important;
     background-color: var(--deposit-concept-color);
 }
+
+#transaction.selected {
+    transform: translateX(-10%) scaleX(0.8);
+
+    transition: 2s;
+}
+
+.options {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    justify-self: center;
+
+    width: 0%;
+    height: auto;
+    visibility: hidden;
+    opacity: 0;
+
+    transition: width 2s, visibility 2s, opacity 2s;
+}
+
+.options.selected {
+    width: auto;
+    visibility: visible;
+    opacity: 1;
+    margin-right: 5vw;
+}
+
+.options button {
+    color: var(--main-color);
+    border: solid 3px var(--main-color);
+    border-radius: 100%;
+    background-color: white;
+
+    width: 0;
+    height: 0;
+
+    transition: 1s;
+
+}
+
+.options.selected button {
+    width: 9vmin;
+    height: 9vmin;
+}
+
+
 
 

@@ -1,10 +1,10 @@
 main {
     display: grid;
-    grid-template-rows: 1fr 3fr 1fr 1fr;
+    grid-template-rows: 1fr 3fr 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr;
     border: solid var(--main-color);
     border-radius: 20px;
-    margin: 7% 5% 0% 5%;
+    margin: 4vh 5% 0% 5%;
     max-height: 90vh;
 
     overflow: hidden;
@@ -21,15 +21,117 @@ app-type-selector {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
+
+    margin: 2%;
+    border: solid 2px var(--main-color);
+    border-radius: 50px;
+    overflow: hidden;
 }
 app-amount-selector {
     display: grid;
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 2;
-    padding: 10% 30%;
+    /*padding-left: 30%;
+    padding-right: 30%;
+    */
+}
+
+::placeholder {
+    color: var(--main-color);
+    opacity: 1;
+}
+
+main>div {
+    display: grid;
+    grid-template-rows: 20% 20% 20% 20% 20%;
+    grid-row-start: 3;
+    grid-row-end: 5;
+    background-color: white;
+    color: var(--main-color);
+    border: solid 1px var(--main-color);
+    border-radius: 100%;
+    width: calc(100px + 2vw);
+    height: calc(100px + 2vh);
+    font-weight: bold;
+    text-align: center;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+
+    cursor: pointer;
+    overflow: hidden;
+
+    transition: 1.5s;
+
+}
+main>div:hover, main>div:active {
+    background-color: var(--main-color);
+    color: white;
+}
+
+main>div>div:first-child {
+    grid-row-start: 2;
+    font-size: calc(0.5em + 1.5vw);
+}
+main>div>div:nth-child(2) {
+    grid-row-start: 3;
+}
+main>div>div:nth-child(3) {
+    grid-row-start: 4;
+}
+bs-datepicker-container {
+    position: fixed !important;
+    top: 50% !important;
+    right: 50% !important;
+    background-color: red !important;
+    transform: none !important;
+}
+#background {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,60%);
+    z-index: 2;
 }
 
 main>input {
     grid-column-start: 2;
+
+    border: solid 2px var(--main-color);
+    border-radius: 50px;
+    outline: none;
+    margin-right: 5%;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    color: var(--main-color);
+    font-size: calc(0.5em + 1vw);
+}
+main>input:first-of-type {
+    margin-bottom: 2%;
+}
+main>input:last-of-type {
+    margin-top: 2%;
+}
+
+main>button {
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+    margin-top: 2vh;
+    color: white;
+    background-color: var(--main-color);
+    font-weight: bold;
+    font-size: calc(0.5em + 1vw);
+    border: none;
+}
+main>button:hover {
+    color: var(--main-color);
+    background-color: white;
+    border-top: solid 3px var(--main-color);
+
+    transition: 1.5s;
 }

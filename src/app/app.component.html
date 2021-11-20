@@ -9,7 +9,27 @@
   </button>
 
   <div>{{title}}</div>
-  <span class="material-icons">search</span>
+  <span class="material-icons" (click)="openOrderBy()">search</span>
+  <div class="order-by">
+
+    <button (click)="orderBy('date',transactions)">
+      <span class="material-icons">date_range</span>
+      Date
+    </button>
+    <button (click)="orderBy('title',transactions)">
+      <span class="material-icons">title</span>
+      Type
+    </button>
+    <button (click)="orderBy('amount',transactions)">
+      <span class="material-icons">euro_symbol</span>
+      Amount
+    </button>
+    <button (click)="orderBy('user',transactions)">
+      <span class="material-icons">people</span>
+      User
+    </button>
+
+  </div>
 
 </header>
 <main>
@@ -32,6 +52,6 @@
       </div>
   </div>
   <div>
-    <app-transactions (amountSpendEmitter)="setAmountSpend($event)" (enteredAmountEmitter)="setEnteredAmount($event)" (transactionsVolumeEmitter)="setTransactionsVolume($event)"></app-transactions>
+    <app-transactions [order]="order" [orderDirection]="orderDirection" (amountSpendEmitter)="setAmountSpend($event)" (enteredAmountEmitter)="setEnteredAmount($event)" (transactionsVolumeEmitter)="setTransactionsVolume($event)" #transactions></app-transactions>
   </div>
 </main>

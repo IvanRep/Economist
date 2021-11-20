@@ -12,8 +12,18 @@ main button {
     color: var(--main-color);
     font-size: calc(0.5em + 1vw);
     font-weight: bold;
+
+    transition: 1s;
+    -o-transition: 1;
+    -moz-transition: 1s;
+    -webkit-transition: 1s;
 }
 
 main button:first-child {
     border: none;
+}
+
+main button.selected {
+    background-color: var(--main-color) !important;
+    color: white;
 }

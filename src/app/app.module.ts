@@ -12,6 +12,8 @@ import { TransactionsBalanceComponent } from './transactions-balance/transaction
 import { TransactionsComponent } from './transactions/transactions.component';
 import { TypeSelectorComponent } from './type-selector/type-selector.component';
 import { AmountSelectorComponent } from './amount-selector/amount-selector.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,7 @@ import { AmountSelectorComponent } from './amount-selector/amount-selector.compo
     AmountSelectorComponent,
   ],
   imports: [
-    BrowserModule, FormsModule, HttpClientModule
+    BrowserModule, FormsModule, HttpClientModule, BsDatepickerModule.forRoot(), BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

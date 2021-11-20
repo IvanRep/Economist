@@ -1,6 +1,6 @@
 <main>
-    <button (click)="setType(transactionType.Deposit)">{{transactionType.Deposit}}</button>
-    <button (click)="setType(transactionType.Bill)">{{transactionType.Bill}}</button>
-    <button (click)="setType(transactionType.Purchase)">{{transactionType.Purchase}}</button>
-    <button (click)="setType(transactionType.Other)">{{transactionType.Other}}</button>
+    <button [ngClass]="{'selected' : getType()==transactionType.Deposit}" (click)="setType(transactionType.Deposit)">{{transactionType.Deposit}}</button>
+    <button [ngClass]="{'selected' : getType()==transactionType.Bill}" (click)="setType(transactionType.Bill)">{{transactionType.Bill}}</button>
+    <button [ngClass]="{'selected' : getType()==transactionType.Purchase}" (click)="setType(transactionType.Purchase)">{{transactionType.Purchase}}</button>
+    <button [ngClass]="{'selected' : getType()==transactionType.Other}" (click)="setType(transactionType.Other)">{{transactionType.Other}}</button>
 </main>

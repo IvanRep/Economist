@@ -1,7 +1,13 @@
 <main>
-    <app-type-selector></app-type-selector>
-    <app-amount-selector></app-amount-selector>
-    <div>Calendario</div>
-    <input placeholder="Concepto">
-    <input placeholder="Usuario">
+    <app-type-selector (typeEmitter)="setType($event)"></app-type-selector>
+    <app-amount-selector (amountEmitter)="setAmount($event)" ></app-amount-selector>
+    <div #dp="bsDatepicker" bsDatepicker [(bsValue)]="dateValue" [bsConfig]="{adaptivePosition: true, isAnimated: true, containerClass: 'theme-red'}">
+        <div>{{dateValue.getDate()}}</div>
+        <div>{{getMonth()}}</div>
+        <div>{{dateValue.getFullYear()}}</div>
+    </div>
+    <!--<div id="background" *ngIf="dp.isOpen"></div>-->
+    <input placeholder="Concepto" (change)="setConcept(concept.value)" #concept>
+    <input placeholder="Usuario" (change)="setUser(user.value)" #user>
+    <button (click)="newTransaction()">Nueva Transacción</button>
 </main>

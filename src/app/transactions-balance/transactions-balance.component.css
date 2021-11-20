@@ -6,7 +6,7 @@ main {
     border: solid var(--main-color);
     border-radius: 20px;
     padding: 5%;
-    margin: 7% 5% 5% 5%;
+    margin: 4vh 5% 5% 5%;
     max-height: 90vh;
 
 
@@ -70,6 +70,8 @@ main.notSpreaded {
     grid-row-end: 7;
     grid-template-columns: 3fr 1fr;
     grid-template-rows: 1fr;
+
+    margin-top: 2%;
 }
 main.notSpreaded>div:first-child {
     grid-template-rows: 1fr 1fr;
