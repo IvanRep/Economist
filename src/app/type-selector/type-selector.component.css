@@ -4,13 +4,16 @@ main {
     grid-template-rows: 1fr;
     flex: 1 1 auto;
 }
+main.all {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
 
 main button {
     background-color: white;
     border-width: 0px;
     border-left: solid 2px var(--main-color);
     color: var(--main-color);
-    font-size: calc(0.5em + 1vw);
+    font-size: calc(0.5em + 1.5vmin);
     font-weight: bold;
 
     transition: 1s;
@@ -21,9 +24,16 @@ main button {
 
 main button:first-child {
     border: none;
+    color: var(--deposit-color);
+}
+main button:hover:first-child {
+    background-color: var(--deposit-concept-color) !important;
 }
 
 main button.selected {
     background-color: var(--main-color) !important;
     color: white;
+}
+main button:first-of-type.selected {
+    background-color: var(--deposit-color) !important;
 }

@@ -1,0 +1,67 @@
+.label {
+    color: var(--main-color);
+    font-size: 1em;
+    font-weight: bolder;
+    text-align: center;
+}
+main {
+    display: grid;
+    grid-template-rows: 20% 20% 20% 20% 20%;
+    background-color: white;
+    color: var(--main-color);
+    border: solid 1px var(--main-color);
+    border-radius: 100%;
+    width: calc(110px + 2vw);
+    height: calc(110px + 2vh);
+    font-weight: bold;
+    text-align: center;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+
+    cursor: pointer;
+    overflow: hidden;
+
+    transition: 1.5s;
+
+}
+main:hover, main:active {
+    background-color: var(--main-color);
+    color: white;
+}
+
+main div:first-child {
+    grid-row-start: 2;
+    font-size: calc(0.5em + 1.5vw);
+}
+main div:nth-child(2) {
+    grid-row-start: 3;
+}
+main div:nth-child(3) {
+    grid-row-start: 4;
+}
+
+main>span {
+    grid-row-start: 1;
+    grid-row-end: 6;
+    justify-self: center;
+    align-self: center;
+
+    font-size: calc(2em + 1vw);
+    color: var(--main-color);
+
+    transition: 1.5s;
+}
+main:hover>span {
+    color: white;
+}
+
+/* DEPOSIT */
+main.deposit {
+    color: var(--deposit-color);
+    border-color: var(--deposit-color);
+}
+main.deposit:hover {
+    color: white;
+    background-color: var(--deposit-color);
+}

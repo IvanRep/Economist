@@ -1,0 +1,9 @@
+<main [ngClass]="{'deposit' : type == transactionType.Deposit}" #dp="bsDatepicker" bsDatepicker [bsValue]="dateValue" (bsValueChange)="setDate($event)" [bsConfig]="{adaptivePosition: true, isAnimated: true, containerClass: type == transactionType.Deposit ? 'theme-green' : 'theme-red' }">
+    <div *ngIf="dateValue; else elseBlock">{{dateValue.getDate()}}</div>
+    <div *ngIf="dateValue">{{getMonth()}}</div>
+    <div *ngIf="dateValue">{{dateValue.getFullYear()}}</div>
+    <ng-template #elseBlock>
+        <span class="material-icons">date_range</span>
+    </ng-template>
+</main>
+<div class="label">{{label}}</div>

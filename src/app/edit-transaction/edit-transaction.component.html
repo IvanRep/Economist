@@ -1,13 +1,9 @@
-<main>
-    <app-type-selector (typeEmitter)="setType($event)"></app-type-selector>
-    <app-amount-selector (amountEmitter)="setAmount($event)" ></app-amount-selector>
-    <div #dp="bsDatepicker" bsDatepicker [(bsValue)]="dateValue" [bsConfig]="{adaptivePosition: true, isAnimated: true, containerClass: 'theme-red'}">
-        <div>{{dateValue.getDate()}}</div>
-        <div>{{getMonth()}}</div>
-        <div>{{dateValue.getFullYear()}}</div>
-    </div>
+<main [ngClass]="{ 'deposit' : transaction.getType() == transactionType.Deposit}">
+    <app-type-selector (typeEmitter)="transaction.setStringType($event)" [type]="transaction.getType()"></app-type-selector>
+    <app-amount-selector (amountEmitter)="transaction.setAmount($event)" [amount]="transaction.getAmount().toString()" [type]="transaction.getType()"></app-amount-selector>
+    <app-date-selector [dateValue]="transaction.getDate()" (dateEmitter)="transaction.setDate($event)" [type]="transaction.getType()"></app-date-selector>
     <!--<div id="background" *ngIf="dp.isOpen"></div>-->
-    <input placeholder="Concepto" (change)="setConcept(concept.value)" #concept>
-    <input placeholder="Usuario" (change)="setUser(user.value)" #user>
-    <button (click)="newTransaction()">Nueva Transacción</button>
+    <input placeholder="Concepto" [(ngModel)]="transaction.concept">
+    <input placeholder="Usuario" [(ngModel)]="transaction.user">
+    <button (click)="newTransaction()">{{modify ? 'Modificar Transacción' : 'Nueva Transacción'}}</button>
 </main>

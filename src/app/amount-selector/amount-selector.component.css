@@ -29,7 +29,7 @@ main>div:first-child>input {
     text-align: right;
 }
 
-main>div:last-child {
+main>div:last-of-type {
     display: grid;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr;
@@ -68,4 +68,43 @@ button:last-child {
 ::placeholder {
     color: var(--main-color);
     opacity: 1;
+}
+
+/* SMALL */
+
+main.small>div:first-child {
+    font-size: calc(1em + 1vw);
+    width: calc(150px + 0.5vw);
+    margin-right: 0%;
+    justify-self: center;
+}
+main.small>div:first-child>input {
+    width: calc(100px + 2vw);
+}
+main.small>div:last-of-type button {
+    width: 30px;
+    height: 25px;
+    font-size: calc(.5em + .5vw);
+}
+
+footer {
+    color: var(--main-color);
+    font-size: 1em;
+    font-weight: bold;
+    justify-self: center;
+    grid-column-start: 2;
+    grid-column-end: 5;
+}
+
+/* DEPOSIT */
+main.deposit input::placeholder, main.deposit>div:first-child>input {
+    color: var(--deposit-color);
+
+    transition: 1.5s;
+}
+main.deposit div, main.deposit button {
+    color: var(--deposit-color);
+    border-color: var(--deposit-color);
+
+    transition: 1.5s;
 }

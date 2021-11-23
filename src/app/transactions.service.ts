@@ -1,24 +1,34 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Filters } from './filters/filters.model';
+import { Transaction } from './transactions/transaction.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransactionsService {
 
+  private filters:Filters = new Filters();
+
   constructor(private http: HttpClient) { }
 
-  newTransaction(date:string, type:string, concept:string, user:string, amount:string) {
-    const headers = { 'content-type': 'application/json'};
-    const body = {date: date, type:type, concept:concept, user:user, amount:amount};
+  newTransaction(transaction:Transaction) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json'});
+    const body = JSON.stringify(transaction);
     console.log(body)
-    return this.http.post('http://192.168.1.56/php/newTransaction.php',body,{'headers': headers});
+    return this.http.post('http://192.168.1.56/php/newTransaction.php',body,{headers, responseType: 'json'});
   }
 
-  getTransactionsID() {
+  deleteTransaction(id:string) {
+    const httpParams = new HttpParams().set('id',id);
+    return this.http.delete('http://192.168.1.56/php/deleteTransaction.php',{params: httpParams});
+  }
+
+  getTransactionsID(order:string, orderDirection:string) {
+
+    const jsonFilters = JSON.stringify(this.filters);
     
-    return this.http.get('http://192.168.1.56/php/listarId.php',{responseType: 'json'});
+    return this.http.get('http://192.168.1.56/php/listarId.php?filters='+jsonFilters+'&order='+order+'&orderDirection='+orderDirection,{responseType: 'json'});
   }
 
   getTransaction(id:string) {
@@ -29,6 +39,17 @@ export class TransactionsService {
   listBackups() {
 
     return this.http.get('http://192.168.1.56/php/listar_archivos.php',{responseType: 'json'});
+  }
+
+
+
+  //Setters
+  setFilters(filters:Filters):void {
+    this.filters = filters;
+  }
+  //Getters
+  getFilters():Filters {
+    return this.filters;
   }
 
 }

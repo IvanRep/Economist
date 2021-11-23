@@ -4,11 +4,13 @@
     --concept-color: RGB(231, 189, 191);
     --deposit-color: RGB(20, 148, 29);
     --deposit-concept-color: RGB(164, 242, 174);
+    --highlight-color: RGB(255,223,0);
 }
 html, body, app-root {
     height: 100vh; 
     max-height: 100vh; 
     max-width: 100vw;
+    overflow-y: hidden;
 
 }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: auto;}

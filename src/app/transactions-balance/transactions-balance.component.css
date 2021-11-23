@@ -66,33 +66,52 @@ button:hover {
 
 /* NOT SPREADED */
 main.notSpreaded {
+
+    max-height: 20vh;
+
     grid-row-start: 4;
     grid-row-end: 7;
     grid-template-columns: 3fr 1fr;
     grid-template-rows: 1fr;
 
+    padding: 0%;
     margin-top: 2%;
+    margin-bottom: 4vh;
 }
 main.notSpreaded>div:first-child {
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr;
+    padding-left: 2vw;
+
 }
 .notSpreaded div#balance {
     border-bottom: none;
-    font-size: calc(2.5em + 1vw);
+    font-size: calc(2em + 1.5vmin);
     text-align: left;
+    align-self: center;
     padding: 0%;
+    padding-top: 1%;
     margin: 0%;
 }
 .notSpreaded div#transactions {
-    font-size: calc(1.5em + 0.5vw);
+    font-size: calc(1em + 1vmin);
+    text-align: left;
+    align-self: center;
+    padding-bottom: 1%;
 }
 
 .notSpreaded div#enteredAmount, .notSpreaded div#amountSpend, .notSpreaded button>div {
     display: none !important;
 }
 .notSpreaded>button {
+   
+    max-height: 19vh;
+    padding: 0%;
     margin: 0%;
-    border-radius: 100%;
+    border: none;
+    border-left: solid;
+    border-radius: 0px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 
 }
 

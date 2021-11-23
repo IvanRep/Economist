@@ -1,27 +1,35 @@
 <section>
-    <div id="transaction" [ngClass]="{ 'deposit' : getType()==transactionType.Deposit}" (click)="selectTransaction($event)">
+    <div id="transaction" [ngClass]="{ 'deposit' : transaction.getType()==transactionType.Deposit}" (click)="selectTransaction($event)">
         <div>
-                    
+            <div class="date">
+                <div>{{transaction.getDate().getDate()}}</div>
+                <div>{{transaction.getLargeMonth()}}</div>
+                <div>{{transaction.getDate().getFullYear()}}</div>
+            </div>      
             <div class="col">
-                <div id="type">{{getType()}}</div>
-                <div id="user">{{getUser()}}</div>
+                <div id="type">{{transaction.getType()}}</div>
+                <div id="user">{{transaction.getUser()}}</div>
 
             </div >
 
             <div id="amount">
-                {{getAmount()}}<span>€</span>
+                {{transaction.getFormatAmount()}}<span>€</span>
             </div>    
 
         </div>
         <div id="concept">
 
-            Concepto: {{getConcept()}}
+            Concepto: {{transaction.getConcept()}}
 
         </div>
 
     </div>
     <div class="options">
-        <button><span class="material-icons">edit</span></button>
-        <button><span class="material-icons">delete</span></button>
+        <button (click)="editTransaction()" >
+            <span class="material-icons">edit</span>
+        </button>
+        <button (click)="deleteTransaction()">
+            <span class="material-icons">delete</span>
+        </button>
     </div>
 <section>

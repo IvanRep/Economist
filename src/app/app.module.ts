@@ -14,6 +14,7 @@ import { TypeSelectorComponent } from './type-selector/type-selector.component';
 import { AmountSelectorComponent } from './amount-selector/amount-selector.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DateSelectorComponent } from './date-selector/date-selector.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TransactionComponent,
     TypeSelectorComponent,
     AmountSelectorComponent,
+    DateSelectorComponent,
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule, BsDatepickerModule.forRoot(), BrowserAnimationsModule

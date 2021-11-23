@@ -5,7 +5,9 @@ main {
     border: solid var(--main-color);
     border-radius: 20px;
     margin: 4vh 5% 0% 5%;
-    max-height: 90vh;
+    height: 60vh;
+    max-height: 60vh;
+    max-width: 35vw;
 
     overflow: hidden;
 
@@ -39,53 +41,16 @@ app-amount-selector {
 
 ::placeholder {
     color: var(--main-color);
+    font-weight: lighter;
     opacity: 1;
 }
 
-main>div {
-    display: grid;
-    grid-template-rows: 20% 20% 20% 20% 20%;
+app-date-selector {
     grid-row-start: 3;
     grid-row-end: 5;
-    background-color: white;
-    color: var(--main-color);
-    border: solid 1px var(--main-color);
-    border-radius: 100%;
-    width: calc(100px + 2vw);
-    height: calc(100px + 2vh);
-    font-weight: bold;
-    text-align: center;
-    align-items: center;
     justify-self: center;
     align-self: center;
 
-    cursor: pointer;
-    overflow: hidden;
-
-    transition: 1.5s;
-
-}
-main>div:hover, main>div:active {
-    background-color: var(--main-color);
-    color: white;
-}
-
-main>div>div:first-child {
-    grid-row-start: 2;
-    font-size: calc(0.5em + 1.5vw);
-}
-main>div>div:nth-child(2) {
-    grid-row-start: 3;
-}
-main>div>div:nth-child(3) {
-    grid-row-start: 4;
-}
-bs-datepicker-container {
-    position: fixed !important;
-    top: 50% !important;
-    right: 50% !important;
-    background-color: red !important;
-    transform: none !important;
 }
 #background {
     position: fixed;
@@ -108,6 +73,7 @@ main>input {
     justify-self: center;
     text-align: center;
     color: var(--main-color);
+    font-weight: bolder;
     font-size: calc(0.5em + 1vw);
 }
 main>input:first-of-type {
@@ -127,11 +93,26 @@ main>button {
     font-weight: bold;
     font-size: calc(0.5em + 1vw);
     border: none;
+
+    transition: 1.5s;
 }
 main>button:hover {
     color: var(--main-color);
     background-color: white;
     border-top: solid 3px var(--main-color);
 
+}
+
+main.deposit, main.deposit app-type-selector,main.deposit input, main.deposit ::placeholder {
+    border-color: var(--deposit-color);
+    color: var(--deposit-color);
+
     transition: 1.5s;
+}
+main.deposit button {
+    background-color: var(--deposit-color);
+}
+main.deposit button:hover {
+    color: var(--deposit-color);
+    border-color: var(--deposit-color);
 }

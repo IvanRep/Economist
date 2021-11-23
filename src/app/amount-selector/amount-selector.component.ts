@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { TransactionType } from '../enums/TransactionType.model';
 
 @Component({
   selector: 'app-amount-selector',
@@ -8,14 +9,39 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class AmountSelectorComponent implements OnInit {
 
   @Output() amountEmitter = new EventEmitter<string>(); 
-  amount:string = "";
+  @Input() amount:string = "";
+  @Input() label:string = '';
+  @Input() small:boolean = false;
+  @Input() type:string = TransactionType.Other;
+  transactionType = TransactionType;
 
   adding:boolean = false;
   subtracting:boolean = false;
+  generator:AsyncGenerator;
 
-  constructor() { }
+  constructor() { 
+
+    async function* add(adding:boolean, amount:string) {
+      while ((adding = yield adding)) {
+        console.log(amount);
+        amount = (parseFloat(amount)+0.01).toString();
+        
+        if(!adding) {
+          return;
+        }
+      }
+      return
+    }
+
+    this.generator = add(this.adding, this.amount);
+
+
+  }
 
   ngOnInit(): void {
+
+    
+
   }
 
   writeAmount(key:KeyboardEvent) {
@@ -34,15 +60,16 @@ export class AmountSelectorComponent implements OnInit {
     this.amountEmitter.emit(this.amount);
   }
 
-  async addAmount() {
+  addAmount() {
     this.adding = true;
-    while (this.adding) {
-      this.amount = (parseFloat(this.amount)+0.01).toString();
-    }
+    this.generator.next(this.adding);
+    
   }
 
-  async addUp() {
+
+  addUp() {
     this.adding = false;
+    this.generator.next(this.adding);
   }
 
   async subtractAmount() {
@@ -58,6 +85,10 @@ export class AmountSelectorComponent implements OnInit {
   focusAmount() {
 
     document.getElementsByTagName('input')[0].focus();
+  }
+
+  getAdding() {
+    return this.adding;
   }
 
 }

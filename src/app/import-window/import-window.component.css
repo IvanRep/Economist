@@ -2,8 +2,21 @@ main {
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr;
-    overflow-y: auto;
+    
+    
+    border: solid var(--main-color);
+    border-radius: 20px;
+    margin: 4vh 5% 0% 5%;
     height: 55vh;
+    max-height: 55vh;
+    max-width: 35vw;
+
+    overflow-y: auto;
+
+    transition: 1.4s;
+    -moz-transition: 1.4s;
+    -o-transition: 1.4s;
+    -webkit-transition: 1.4s;
 }
 button {
     display: grid;

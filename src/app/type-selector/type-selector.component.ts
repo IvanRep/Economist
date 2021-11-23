@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TransactionType } from '../enums/TransactionType.model';
 
 @Component({
@@ -9,16 +9,20 @@ import { TransactionType } from '../enums/TransactionType.model';
 export class TypeSelectorComponent implements OnInit {
 
   transactionType = TransactionType;
-
-  type:TransactionType;
-
+  @Input() all:boolean;
+  @Input() type:string;
   @Output() typeEmitter = new EventEmitter<string>();
 
-  constructor() { 
-    this.type = TransactionType.Deposit;
+
+  constructor() {
+    this.all = false;
+    this.type = TransactionType.All;
   }
 
   ngOnInit(): void {
+     if (this.type == undefined) {
+      this.all ? this.type = TransactionType.All : this.type = TransactionType.Deposit;
+     }
   }
 
   getType():string {

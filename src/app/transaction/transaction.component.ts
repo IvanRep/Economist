@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TransactionType } from '../enums/TransactionType.model';
 import { TransactionsService } from '../transactions.service';
+import { Transaction } from '../transactions/transaction.model';
 
 @Component({
   selector: 'app-transaction',
@@ -10,22 +11,18 @@ import { TransactionsService } from '../transactions.service';
 export class TransactionComponent implements OnInit {
 
   @Output() amountEmitter = new EventEmitter<number>();
+  @Output() transactionEmitter = new EventEmitter<Transaction>();
   @Input() id:string;
-  private type:TransactionType;
-  private date:string
-  private concept:string;
-  private user:string;
-  private amount:number;
 
-  transactionType:any = TransactionType; 
+  transaction:Transaction;
+
+  transactionType:any = TransactionType;
 
   constructor(private transactionsService:TransactionsService) {
-      this.id = "";
-      this.type = TransactionType.Other;
-      this.date = "";
-      this.concept = "";
-      this.user = "";
-      this.amount = 0;
+    
+    this.transaction = new Transaction('',TransactionType.Deposit,new Date(),'','','');
+
+    this.id = "";
   }
 
   ngOnInit(): void {
@@ -34,24 +31,29 @@ export class TransactionComponent implements OnInit {
 
   }
 
-  emitAmount() {
-      
-      this.amountEmitter.emit(
-          this.type==TransactionType.Deposit?this.amount:-this.amount
-      )
-  }
   getTransaction(transaction:any):void {
-    this.id = transaction.id;
-    this.type = this.translateType(transaction.tipo);
-    this.date = transaction.fecha;
-    this.concept = transaction.concepto;
-    this.user = transaction.usuario;
-    this.amount = parseFloat(transaction.importe);
+    this.transaction.setId(transaction.id);
+    this.transaction.setStringType(transaction.tipo);
+    //Cambio el formato de fecha enviado por la bd para manejarlo como un objeto Date
+    const dateSplitted = transaction.fecha.split("/");
+    const date = new Date(parseInt(dateSplitted[2]),parseInt(dateSplitted[1])-1,parseInt(dateSplitted[0]));
+    this.transaction.setDate(date);
+
+    this.transaction.setConcept(transaction.concepto);
+    this.transaction.setUser(transaction.usuario);
+    this.transaction.setAmount(transaction.importe);
 
     this.emitAmount();
   }
 
-  selectTransaction(target:Event) {
+  emitAmount():void {
+      
+    this.amountEmitter.emit(
+        this.transaction.getType()==TransactionType.Deposit?this.transaction.getAmount():-this.transaction.getAmount()
+    );
+  }
+
+  selectTransaction(target:Event):void {
     const transaction = (<HTMLDivElement>target.currentTarget);
     if (transaction.id == 'transaction') {
         if (transaction.classList.contains('selected')) {
@@ -64,59 +66,31 @@ export class TransactionComponent implements OnInit {
     }
   }
 
-  translateType(type:string) {
-    switch(type) {
-        case 'Ingreso':
-            return TransactionType.Deposit;
-        case 'Factura':
-            return TransactionType.Bill;
-        case 'Compra':
-            return TransactionType.Purchase;
-        case 'Otro':
-            return TransactionType.Other;
-        default:
-            return TransactionType.Other;
+  editTransaction():void {
+ 
+    this.transactionEmitter.emit(this.transaction);
+
+  }
+
+  deleteTransaction():void {
+
+    if (true) {
+        alert("Fuera de servicio....\nEsperando que se puedan crear nuevas transacciones.")
+    } else {
+        this.transactionsService.deleteTransaction(this.getId()).subscribe();
     }
+    
+
   }
 
   //Setters
   public setId(id:string):void {
       this.id = id;
   }
-  public setType(type:TransactionType):void {
-      this.type = type;
-  }
-  public setDate(date:string):void {
-      this.date = date;
-  }
-  public setConcept(concept:string):void {
-      this.concept = concept;
-  }
-  public setUser(user:string):void {
-      this.user = user;
-  }
-  public setAmount(amount:number):void {
-      this.amount = amount;
-  }
+ 
   //Getters
   public getId():string {
       return this.id;
   }
-  public getType():TransactionType {
-      return this.type;
-  }
-  public getDate():string {
-      return this.date;
-  }
-  public getConcept():string {
-      return this.concept;
-  }
-  public getUser():string {
-      return this.user;
-  }
-  public getAmount():string {
-      return Intl.NumberFormat('es', {maximumFractionDigits: 2, minimumFractionDigits: 2}).format(this.amount);
-  }
-
 
 }

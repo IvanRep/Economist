@@ -7,15 +7,17 @@ section {
 #transaction {
     display: flex;
     flex-direction: column;
-    flex: 1 1 auto;
+    flex: 1 0 auto;
 
     border: solid var(--main-color);
     border-radius: 50px;
+    color: var(--main-color);
     
     overflow: hidden;
     padding-bottom: 2%;
 
     transition: 2s;
+    cursor: pointer;
 }
 section:first-of-type {
     margin-top: 0%;
@@ -25,7 +27,38 @@ section:first-of-type {
     flex-direction: row;
     flex: 1 1 auto;
 
-    padding: 2% 10%;
+    padding: 2% 10% 2% 2%;
+}
+.date {
+    display: grid;
+    grid-template-rows: 20% 20% 20% 20% 20%;
+    background-color: white;
+    color: var(--main-color);
+    border: solid 1px var(--main-color);
+    border-radius: 100%;
+    width: calc(100px + 4vw);
+    height: calc(100px + 1vw);
+    font-weight: bold;
+    text-align: center;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+
+    cursor: pointer;
+    overflow: hidden;
+
+    transition: 1.5s;
+
+}
+.date div:first-child {
+    grid-row-start: 2;
+    font-size: calc(0.5em + 1.5vw);
+}
+.date div:nth-child(2) {
+    grid-row-start: 3;
+}
+.date div:nth-child(3) {
+    grid-row-start: 4;
 }
 .col {
     display: flex;
@@ -58,7 +91,7 @@ section:first-of-type {
     flex: 2 1 auto;
     flex-wrap: nowrap;
     align-items: flex-end;
-    justify-content: center;
+    align-self: center;
     font-size: calc(2.1em + 0.5vw);
     font-weight: bold;
     color: var(--main-color);
@@ -76,6 +109,9 @@ section:first-of-type {
 .deposit {
     border-color: var(--deposit-color) !important;
 }
+.deposit .date {
+    border-color: var(--deposit-color);
+}
 .deposit div{
     color: var(--deposit-color) !important;
 }
@@ -84,8 +120,13 @@ section:first-of-type {
     background-color: var(--deposit-concept-color);
 }
 
+.deposit ~ .options button:first-of-type {
+    border-color: var(--deposit-color) !important;
+    color: var(--deposit-color);
+}
+
 #transaction.selected {
-    transform: translateX(-10%) scaleX(0.8);
+    transform: translateX(-5%) scaleX(0.9);
 
     transition: 2s;
 }
@@ -128,6 +169,7 @@ section:first-of-type {
     width: 9vmin;
     height: 9vmin;
 }
+
 
 
 

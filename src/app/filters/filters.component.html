@@ -1,1 +1,17 @@
-<p>filters works!</p>
+<main>
+    <app-type-selector (typeEmitter)="setType($event)" [all]='true'></app-type-selector>
+
+    <app-amount-selector [small]="true" [label]="'mínimo'" (amountEmitter)="setMinimumAmount($event)"></app-amount-selector>
+    <app-amount-selector [small]="true" [label]="'máximo'" (amountEmitter)="setMaximumAmount($event)"></app-amount-selector>
+
+    <app-date-selector [label]="'desde'" (dateEmitter)="setSince($event)"></app-date-selector>
+    <app-date-selector [label]="'hasta'" (dateEmitter)="setUntil($event)"></app-date-selector>
+
+    <input placeholder="Concepto" (change)="setConcept(concept.value)" #concept/>
+    <input placeholder="Usuario" (change)="setUser(user.value)" #user/>
+
+    <button>
+        Borrar Filtros
+    </button>
+
+</main>

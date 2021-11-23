@@ -14,12 +14,14 @@ export class TransactionsComponent implements OnInit {
   transactions:Transaction[];
   error:any = '';
 
+  @Output() transactionsEmitter = new EventEmitter<Transaction>();
   @Output() transactionsVolumeEmitter = new EventEmitter<number>();
   @Output() enteredAmountEmitter = new EventEmitter<number>();
   @Output() amountSpendEmitter = new EventEmitter<number>();
 
-  @Input() order = 'date';
-  @Input() orderDirection = 'asc';
+  @Input() order = 'Fecha';
+  @Input() orderDirection = 'desc';
+
   constructor(private transactionsService:TransactionsService) { 
     this.title = 'Transacciones Realizadas';
     this.transactions = [
@@ -30,12 +32,12 @@ export class TransactionsComponent implements OnInit {
 
   getTransactions() {
     this.transactions = [];
-    this.transactionsService.getTransactionsID().subscribe(result => this.createTransactions(result));
+    this.transactionsService.getTransactionsID(this.order, this.orderDirection).subscribe(result => this.createTransactions(result));
   }
 
   createTransactions(ids:any) {
     for (let id of ids) {
-      this.transactions.push(new Transaction(id.id,TransactionType.All, '00/00/0000','concept','user',0));
+      this.transactions.push(new Transaction(id.id,TransactionType.All, '00/00/0000','concept','user',''));
     }
     this.emitTransactionsVolume(this.transactions.length);
   }
@@ -47,6 +49,10 @@ export class TransactionsComponent implements OnInit {
       this.emitAmountSpend(Math.abs(amount));
     }
 
+  }
+
+  editTransaction(transaction:Transaction):void {
+    this.transactionsEmitter.emit(transaction);
   }
 
   emitTransactionsVolume(volume:number) {
