@@ -3,11 +3,14 @@ section {
     flex-direction: row;
     flex-wrap: nowrap;
     margin: 5% 0%;
+
+    transition: 2s;
 }
 #transaction {
     display: flex;
     flex-direction: column;
     flex: 1 0 auto;
+    min-height: 25vh;
 
     border: solid var(--main-color);
     border-radius: 50px;
@@ -31,13 +34,16 @@ section:first-of-type {
 }
 .date {
     display: grid;
+    box-sizing: border-box;
     grid-template-rows: 20% 20% 20% 20% 20%;
     background-color: white;
     color: var(--main-color);
     border: solid 1px var(--main-color);
     border-radius: 100%;
-    width: calc(100px + 4vw);
+    width: calc(100px + 1vw);
+    min-width: calc(100px + 1vw);
     height: calc(100px + 1vw);
+    min-height: calc(100px + 1vw);
     font-weight: bold;
     text-align: center;
     align-items: center;
@@ -138,18 +144,19 @@ section:first-of-type {
     justify-self: center;
 
     width: 0%;
+    margin-right: 0%;
     height: auto;
     visibility: hidden;
     opacity: 0;
 
-    transition: width 2s, visibility 2s, opacity 2s;
+    transition: margin-right 2s, height 2s, width 2s, visibility 2s, opacity 2s;
 }
 
 .options.selected {
-    width: auto;
+    
     visibility: visible;
     opacity: 1;
-    margin-right: 5vw;
+    margin-right: 10vw;
 }
 
 .options button {
@@ -164,12 +171,20 @@ section:first-of-type {
     transition: 1s;
 
 }
+.options button span {
+    font-size: 0px;
+
+    transition: 1s;
+}
 
 .options.selected button {
     width: 9vmin;
     height: 9vmin;
 }
 
+.options.selected button span {
+    font-size: 2em;
+}
 
 
 

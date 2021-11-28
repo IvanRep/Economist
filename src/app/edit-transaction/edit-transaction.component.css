@@ -79,8 +79,12 @@ main>input {
 main>input:first-of-type {
     margin-bottom: 2%;
 }
-main>input:last-of-type {
+main>app-user-selector {
+    grid-column-start: 2;
+    margin-right: 5%;
+    place-self: center;
     margin-top: 2%;
+    font-size: calc(0.5em + 1vw);
 }
 
 main>button {
@@ -103,6 +107,7 @@ main>button:hover {
 
 }
 
+/* DEPOSIT */
 main.deposit, main.deposit app-type-selector,main.deposit input, main.deposit ::placeholder {
     border-color: var(--deposit-color);
     color: var(--deposit-color);

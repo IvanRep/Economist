@@ -43,7 +43,7 @@
   </nav>
   <div id="wAction">
       <div id="action" [ngSwitch]="action" [ngClass]="{'vacio' : action==0}">
-        <app-edit-transaction *ngSwitchCase="1" [modify]="modify" [transaction]="editTransaction"></app-edit-transaction>
+        <app-edit-transaction *ngSwitchCase="1" [modify]="modify" [transaction]="editTransaction" (listTransactionsEmitter)="listTransactions(transactions)"></app-edit-transaction>
         <app-filters *ngSwitchCase="2" (listTransactionsEmitter)="listTransactions(transactions)"></app-filters>
         <app-import-window *ngSwitchCase="3"></app-import-window>
       </div>
@@ -52,6 +52,6 @@
       </div>
   </div>
   <div>
-    <app-transactions (transactionsEmitter)="openEditTransaction($event)" [order]="order" [orderDirection]="orderDirection" (amountSpendEmitter)="setAmountSpend($event)" (enteredAmountEmitter)="setEnteredAmount($event)" (transactionsVolumeEmitter)="setTransactionsVolume($event)" #transactions></app-transactions>
+    <app-transactions (restoreTransactionEmitter)="restoreTransaction()" (transactionsEmitter)="openEditTransaction($event)" (amountSpendEmitter)="setAmountSpend($event)" (enteredAmountEmitter)="setEnteredAmount($event)" (transactionsVolumeEmitter)="setTransactionsVolume($event)" #transactions></app-transactions>
   </div>
 </main>

@@ -5,23 +5,31 @@ export class Transaction {
     private id:string;
     private type:TransactionType;
     private date:any;
-    private dbDate:string;
     concept:string;
     user:string;
     private amount:string;
 
-    constructor(id:string, type:TransactionType, date:any, concept:string, user:string, amount:string) {
+    constructor(id:string = '', type:TransactionType = TransactionType.Deposit, date:any = new Date(), concept:string = '', user:string = '', amount:string = '') {
         this.id = id;
         this.type = type;
         this.date = date;
-        this.dbDate = 'YYYY-MM-DD HH:II:SS';
         this.concept = concept;
         this.user = user;
         this.amount = amount;
     }
 
-    toDataBaseFormat() {
-        this.dbDate = this.date.getTime();
+    public clone():Transaction {
+
+      return new Transaction(this.id,this.type,this.date,this.concept,this.user,this.amount);
+    }
+
+    public clear() {
+      this.id = '';
+      this.type = TransactionType.Deposit;
+      this.date = new Date();
+      this.concept = '';
+      this.user = '';
+      this.amount = '';
     }
 
     //Setters

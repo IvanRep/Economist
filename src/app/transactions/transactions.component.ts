@@ -14,25 +14,36 @@ export class TransactionsComponent implements OnInit {
   transactions:Transaction[];
   error:any = '';
 
+  @Output() restoreTransactionEmitter = new EventEmitter<void>();
   @Output() transactionsEmitter = new EventEmitter<Transaction>();
   @Output() transactionsVolumeEmitter = new EventEmitter<number>();
   @Output() enteredAmountEmitter = new EventEmitter<number>();
   @Output() amountSpendEmitter = new EventEmitter<number>();
 
-  @Input() order = 'Fecha';
-  @Input() orderDirection = 'desc';
+  order = 'Fecha';
+  orderDirection = 'desc';
 
   constructor(private transactionsService:TransactionsService) { 
     this.title = 'Transacciones Realizadas';
     this.transactions = [
     ];
 
-    this.getTransactions();
+    this.getTransactions(this.order,this.orderDirection);
   }
 
-  getTransactions() {
+  deleteTransaction(id:string) {
+    for (let i = 0; i<this.transactions.length; i++) {
+      if (this.transactions[i].getId() == id) {
+        this.transactions.splice(i,1);
+      }
+    }
+  }
+
+  getTransactions(order:string = this.order, orderDirection:string = this.orderDirection) {
     this.transactions = [];
-    this.transactionsService.getTransactionsID(this.order, this.orderDirection).subscribe(result => this.createTransactions(result));
+    this.order = order;
+    this.orderDirection = orderDirection;
+    this.transactionsService.getTransactionsID(order, orderDirection).subscribe(result => this.createTransactions(result));
   }
 
   createTransactions(ids:any) {

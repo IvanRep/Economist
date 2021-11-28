@@ -1,6 +1,6 @@
 <main>
     <div *ngFor="let transaction of transactions">
-        <app-transaction (transactionEmitter)="editTransaction($event)" (amountEmitter)="setBalance($event)" [id]="transaction.getId()" class="app-transaction"></app-transaction>
+        <app-transaction (deleteTransactionEmitter)="deleteTransaction($event)" (restoreTransactionEmitter)="restoreTransactionEmitter.emit()" (transactionEmitter)="editTransaction($event)" (amountEmitter)="setBalance($event)" [id]="transaction.getId()" class="app-transaction"></app-transaction>
     </div>
     
 </main>

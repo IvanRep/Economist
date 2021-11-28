@@ -28,6 +28,9 @@ main>div:first-child>input {
     width: calc(100px + 10vw);
     text-align: right;
 }
+main>div:first-child>input::-webkit-inner-spin-button, main>div:first-child>input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
 
 main>div:last-of-type {
     display: grid;
@@ -97,7 +100,7 @@ footer {
 }
 
 /* DEPOSIT */
-main.deposit input::placeholder, main.deposit>div:first-child>input {
+main.deposit input::placeholder, main.deposit>div:first-child>input, main.deposit>footer {
     color: var(--deposit-color);
 
     transition: 1.5s;

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TransactionType } from '../enums/TransactionType.model';
 import { TransactionsService } from '../transactions.service';
 import { Transaction } from '../transactions/transaction.model';
@@ -11,8 +11,10 @@ import { Transaction } from '../transactions/transaction.model';
 export class EditTransactionComponent implements OnInit {
 
   transactionType = TransactionType;
+  @Output() listTransactionsEmitter:EventEmitter<void> = new EventEmitter<void>();
+  @Output() updateTransactionEmitter:EventEmitter<string> = new EventEmitter<string>();
 
-  @Input() transaction:Transaction = new Transaction('',TransactionType.Deposit,new Date(),'','','');
+  @Input() transaction:Transaction = new Transaction();
 
   @Input() modify:boolean = false;
 
@@ -22,14 +24,28 @@ export class EditTransactionComponent implements OnInit {
     if (this.transaction.getType() == undefined) this.transaction.setType(TransactionType.Deposit);
   }
 
-  newTransaction():void {
+  confirmTransaction():void {
     if (this.transaction.getAmount() != '' && this.transaction.getConcept() != '' && this.transaction.getUser() != '') {
-      var options:any = {year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'};
-      this.transaction.toDataBaseFormat();
-      this.transactionsService.newTransaction(this.transaction).subscribe();
+      if (this.modify) {
+        this.transactionsService.updateTransaction(this.transaction.clone()).subscribe(() => alert('Transacción Modificada'));
+      } else {
+        this.transactionsService.newTransaction(this.transaction.clone()).subscribe(() => this.newTransaction());
+      }
+      this.transaction.clear();
+      
     } else {
       alert('Rellena todos los campos');
     }
   }
+
+  newTransaction() {
+    this.listTransactionsEmitter.emit();
+  }
+
+  updateTransaction(id:string) {
+    this.updateTransactionEmitter.emit(id);
+    alert('Transacción Modificada.');
+  }
+
   
 }

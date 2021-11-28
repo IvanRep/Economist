@@ -1,14 +1,15 @@
 <main [ngClass]="{'small' : small, 'deposit' : type == transactionType.Deposit}">
     <div>
-        <input type="text" [(ngModel)]="amount" 
-        (keydown)="writeAmount($event)"
-        (change)="sendAmount()"
-        placeholder="0000.00"/>
+        <input type="number" step="0.05" min="0" #amountInput
+        (input)="inputAmount(amountInput.value)"
+        [value]="amount"
+        placeholder="0000,00"
+        tabindex="0"/>
         <div (click)="focusAmount()">€</div>
     </div>
     <div>
-        <button (mousedown)="addAmount()" (mouseup)="addUp()">+</button>
-        <button (mousedown)="subtractAmount()" (mouseup)="subtractUp()">-</button>
+        <button (pointerdown)="addAmount(amountInput)" tabindex="-1">+</button>
+        <button (mousedown)="subtractAmount(amountInput)" tabindex="-1">-</button>
     </div>
     <footer>{{label}}</footer>
 </main>

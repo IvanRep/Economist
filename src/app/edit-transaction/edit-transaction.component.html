@@ -1,9 +1,8 @@
 <main [ngClass]="{ 'deposit' : transaction.getType() == transactionType.Deposit}">
     <app-type-selector (typeEmitter)="transaction.setStringType($event)" [type]="transaction.getType()"></app-type-selector>
-    <app-amount-selector (amountEmitter)="transaction.setAmount($event)" [amount]="transaction.getAmount().toString()" [type]="transaction.getType()"></app-amount-selector>
-    <app-date-selector [dateValue]="transaction.getDate()" (dateEmitter)="transaction.setDate($event)" [type]="transaction.getType()"></app-date-selector>
-    <!--<div id="background" *ngIf="dp.isOpen"></div>-->
-    <input placeholder="Concepto" [(ngModel)]="transaction.concept">
-    <input placeholder="Usuario" [(ngModel)]="transaction.user">
-    <button (click)="newTransaction()">{{modify ? 'Modificar Transacción' : 'Nueva Transacción'}}</button>
+    <app-amount-selector (amountEmitter)="transaction.setAmount($event)" [amount]="transaction.getAmount()" [type]="transaction.getType()"></app-amount-selector>
+    <app-date-selector [dateValue]="transaction.getDate()" (dateEmitter)="transaction.setDate($event)" [type]="transaction.getType()" tabindex="-1"></app-date-selector>
+    <input placeholder="Concepto" [(ngModel)]="transaction.concept" tabindex="0">
+    <app-user-selector [user]="transaction.getUser()" (userEmitter)="transaction.setUser($event)" [type]="transaction.getType()"></app-user-selector>
+    <button (click)="confirmTransaction()">{{modify ? 'Modificar Transacción' : 'Nueva Transacción'}}</button>
 </main>

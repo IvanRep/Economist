@@ -1,16 +1,16 @@
-<main>
-    <app-type-selector (typeEmitter)="setType($event)" [all]='true'></app-type-selector>
+<main [ngClass]="{'deposit' : filters.getType()==transactionType.Deposit}">
+    <app-type-selector (typeEmitter)="setType($event)" [type]="filters.getType()" [all]='true'></app-type-selector>
 
-    <app-amount-selector [small]="true" [label]="'mínimo'" (amountEmitter)="setMinimumAmount($event)"></app-amount-selector>
-    <app-amount-selector [small]="true" [label]="'máximo'" (amountEmitter)="setMaximumAmount($event)"></app-amount-selector>
+    <app-amount-selector [small]="true" [label]="'mínimo'" (amountEmitter)="setMinimumAmount($event)" [amount]="filters.getStringMinimumAmount().toString()" [type]="filters.getType()"></app-amount-selector>
+    <app-amount-selector [small]="true" [label]="'máximo'" (amountEmitter)="setMaximumAmount($event)" [amount]="filters.getStringMaximumAmount().toString()" [type]="filters.getType()"></app-amount-selector>
 
-    <app-date-selector [label]="'desde'" (dateEmitter)="setSince($event)"></app-date-selector>
-    <app-date-selector [label]="'hasta'" (dateEmitter)="setUntil($event)"></app-date-selector>
+    <app-date-selector [label]="'desde'" (dateEmitter)="setSince($event)" [dateValue]="filters.getSince()" [type]="filters.getType()"></app-date-selector>
+    <app-date-selector [label]="'hasta'" (dateEmitter)="setUntil($event)" [dateValue]="filters.getUntil()" [type]="filters.getType()"></app-date-selector>
 
-    <input placeholder="Concepto" (change)="setConcept(concept.value)" #concept/>
-    <input placeholder="Usuario" (change)="setUser(user.value)" #user/>
+    <input placeholder="Concepto" (input)="setConcept(concept.value)" [value]="filters.getConcept()" #concept/>
+    <app-user-selector [user]="filters.getUser()" (userEmitter)="setUser($event)" [type]="filters.getType()"></app-user-selector>
 
-    <button>
+    <button (click)="clearFilters()">
         Borrar Filtros
     </button>
 

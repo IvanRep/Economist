@@ -10,6 +10,8 @@ import { Transaction } from '../transactions/transaction.model';
 })
 export class TransactionComponent implements OnInit {
 
+  @Output() deleteTransactionEmitter = new EventEmitter<string>();
+  @Output() restoreTransactionEmitter = new EventEmitter<void>();
   @Output() amountEmitter = new EventEmitter<number>();
   @Output() transactionEmitter = new EventEmitter<Transaction>();
   @Input() id:string;
@@ -20,7 +22,7 @@ export class TransactionComponent implements OnInit {
 
   constructor(private transactionsService:TransactionsService) {
     
-    this.transaction = new Transaction('',TransactionType.Deposit,new Date(),'','','');
+    this.transaction = new Transaction('',TransactionType.Other,new Date(),'','','');
 
     this.id = "";
   }
@@ -54,15 +56,25 @@ export class TransactionComponent implements OnInit {
   }
 
   selectTransaction(target:Event):void {
+    const spreadedTransaction = document.querySelector('div.selected');
     const transaction = (<HTMLDivElement>target.currentTarget);
-    if (transaction.id == 'transaction') {
-        if (transaction.classList.contains('selected')) {
-            transaction.classList.remove('selected');
-            transaction.parentElement?.querySelector('.options')?.classList.remove('selected');
-        } else {
-            transaction.classList.add('selected');
-            transaction.parentElement?.querySelector('.options')?.classList.add('selected');
-        }
+
+    if (transaction!=spreadedTransaction && spreadedTransaction!=undefined) {
+
+      this.restoreTransactionEmitter.emit();
+
+      spreadedTransaction?.classList.remove('selected');
+      spreadedTransaction?.parentElement?.querySelector('.options')?.classList.remove('selected');
+
+    }
+  
+    if (transaction.classList.contains('selected')) {
+      this.restoreTransactionEmitter.emit();
+      transaction.classList.remove('selected');
+      transaction.parentElement?.querySelector('.options')?.classList.remove('selected');
+    } else {
+      transaction.classList.add('selected');
+      transaction.parentElement?.querySelector('.options')?.classList.add('selected');
     }
   }
 
@@ -74,13 +86,16 @@ export class TransactionComponent implements OnInit {
 
   deleteTransaction():void {
 
-    if (true) {
-        alert("Fuera de servicio....\nEsperando que se puedan crear nuevas transacciones.")
-    } else {
-        this.transactionsService.deleteTransaction(this.getId()).subscribe();
-    }
-    
+    this.transactionsService.deleteTransaction(this.getId()).subscribe();
 
+    //Emito la cantidad contraria al amount para que se actualice el balance
+    this.amountEmitter.emit(
+      this.transaction.getType()==TransactionType.Deposit?-this.transaction.getAmount():this.transaction.getAmount()
+    );
+    //Borro la transacción de la lista de id del padre
+    this.deleteTransactionEmitter.emit(this.transaction.getId());
+
+    
   }
 
   //Setters

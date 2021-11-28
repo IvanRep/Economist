@@ -63,10 +63,6 @@ input:first-of-type {
     grid-column-start: 1;
     grid-column-end: 3;
 }
-input:last-of-type {
-    grid-column-start: 1;
-    grid-column-end: 3;
-}
 input {
 
     width: 80%;
@@ -79,6 +75,13 @@ input {
     color: var(--main-color);
     font-weight: bolder;
     font-size: calc(0.5em + .5vw);
+}
+app-user-selector {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    font-size: calc(0.5em + .5vw);
+    width: 80%;
+    place-self: center;
 }
 
 main button {
@@ -103,4 +106,19 @@ main>button:hover {
 ::placeholder {
     font-weight: lighter;
     color: var(--main-color);
+}
+
+/* DEPOSIT */
+main.deposit, main.deposit app-type-selector,main.deposit input, main.deposit ::placeholder {
+    border-color: var(--deposit-color);
+    color: var(--deposit-color);
+
+    transition: 1.5s;
+}
+main.deposit button {
+    background-color: var(--deposit-color);
+}
+main.deposit button:hover {
+    color: var(--deposit-color);
+    border-color: var(--deposit-color);
 }

@@ -15,13 +15,17 @@ export class TransactionsService {
   newTransaction(transaction:Transaction) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json'});
     const body = JSON.stringify(transaction);
-    console.log(body)
     return this.http.post('http://192.168.1.56/php/newTransaction.php',body,{headers, responseType: 'json'});
   }
 
+  updateTransaction(transaction:Transaction) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json'});
+    const body = JSON.stringify(transaction);
+    return this.http.put('http://192.168.1.56/php/updateTransaction.php',body,{headers, responseType: 'json'});
+  }
+
   deleteTransaction(id:string) {
-    const httpParams = new HttpParams().set('id',id);
-    return this.http.delete('http://192.168.1.56/php/deleteTransaction.php',{params: httpParams});
+    return this.http.delete('http://192.168.1.56/php/deleteTransaction.php?id='+id);
   }
 
   getTransactionsID(order:string, orderDirection:string) {
@@ -39,6 +43,11 @@ export class TransactionsService {
   listBackups() {
 
     return this.http.get('http://192.168.1.56/php/listar_archivos.php',{responseType: 'json'});
+  }
+
+  getUsers(user:string, type:string) {
+
+    return this.http.get('http://192.168.1.56/php/getUsers.php?user='+user+'&type='+type,{responseType: 'json'});
   }
 
 

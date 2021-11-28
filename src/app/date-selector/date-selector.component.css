@@ -53,15 +53,19 @@ main>span {
     transition: 1.5s;
 }
 main:hover>span {
-    color: white;
+    color: white !important;
 }
 
 /* DEPOSIT */
-main.deposit {
+main.deposit, main.deposit>span {
     color: var(--deposit-color);
     border-color: var(--deposit-color);
 }
 main.deposit:hover {
     color: white;
     background-color: var(--deposit-color);
+}
+
+main.deposit ~ .label {
+    color: var(--deposit-color);
 }

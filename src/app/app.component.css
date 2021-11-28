@@ -48,10 +48,6 @@ header>span::after {
     display: grid;
     grid-template-columns: 12.5vw 12.5vw 12.5vw 12.5vw;
     
-    /*border: solid 3px var(--main-color);
-    border-radius: 30px;
-    background-color: var(--main-color);
-    */
     width: 50vw;
     right: .5vw;
     top: 5.2rem;
@@ -72,10 +68,10 @@ header>span::after {
 
     display: grid;
     grid-template-rows: 1.5fr 1fr ;
-    border: solid 2px white;
+    border: solid 2px var(--main-color);
     border-radius: 100%;
-    color: white;
-    background-color: var(--main-color);
+    color: var(--main-color);
+    background-color: white;
     justify-self: center;
 
     font-size: .5rem;
@@ -84,26 +80,23 @@ header>span::after {
 
 }
 .order-by>button:hover {
-    color: var(--main-color);
     border-color: var(--main-color);
     background-color: white !important;
 }
-.order-by>button:hover>span {
-    color: var(--main-color);
-}
+
 .order-by>button>span {
-    color: white;
+    color: var(--main-color);
     align-self: flex-end;
-    font-size: 2rem;
+    font-size: 2.2rem;
 }
 .order-by>button.asc::after {
     content: '\25B2';
+    font-size: 2em;
 }
 .order-by>button.desc::after {
     content: '\25BC';
+    font-size: 2em;
 }
-
-
 
 main {
     display: grid;

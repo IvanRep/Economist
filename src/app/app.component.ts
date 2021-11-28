@@ -13,7 +13,8 @@ export class AppComponent {
   title = 'Economist';
 
   //Variable usada para guardar los datos de una transacción que va a ser editada
-  editTransaction:Transaction = new Transaction('',TransactionType.Deposit,new Date(),'','','');
+  editTransaction:Transaction = new Transaction();
+  backupTransaction:Transaction = new Transaction();
   modify:boolean = false;
 
   balanceText = 'El saldo de la cuenta es ';
@@ -46,8 +47,8 @@ export class AppComponent {
     const button = (<HTMLButtonElement>event.currentTarget);
 
     this.order = button.value;
-    button.classList.add(this.orderDirection);
     this.orderDirection == 'asc' ? this.orderDirection = 'desc' : this.orderDirection = 'asc';
+    button.classList.add(this.orderDirection);
     
     this.listTransactions(transactions);
   }
@@ -57,32 +58,59 @@ export class AppComponent {
     this.enteredAmount = 0;
     this.setTransactionsVolume(0);
 
-    transactions.getTransactions();
+    transactions.getTransactions(this.order,this.orderDirection);
   }
+
+  restoreTransaction() {
+
+    if (this.action == ActionWindow.NewTransaction && this.modify == true) this.action = ActionWindow.None;
+
+    this.editTransaction.setId(this.backupTransaction.getId());
+    this.editTransaction.setType(this.backupTransaction.getType());
+    this.editTransaction.setDate(this.backupTransaction.getDate());
+    this.editTransaction.setConcept(this.backupTransaction.getConcept());
+    this.editTransaction.setUser(this.backupTransaction.getUser());
+    this.editTransaction.setAmount(this.backupTransaction.getAmount());
+  } 
 
   getAction():ActionWindow {
     return this.action;
   }
 
   openNewTransaction():void {
-    this.action = ActionWindow.NewTransaction;
-    this.editTransaction = new Transaction('',TransactionType.Deposit,new Date(),'','','');
-    this.modify = false;
+    if (this.action != ActionWindow.NewTransaction) {
+      this.restoreTransaction();
+      this.action = ActionWindow.NewTransaction;
+      this.modify = false;
+    } else {
+      this.action = ActionWindow.None;
+    }
+
+    this.editTransaction = new Transaction();
+    
   }
 
   openEditTransaction(transaction:Transaction):void {
     
     this.action = ActionWindow.NewTransaction;
     this.editTransaction = transaction;
+    this.backupTransaction = new Transaction(transaction.getId(),transaction.getType(),transaction.getDate(),transaction.getConcept(),transaction.getUser(),transaction.getAmount());
     this.modify = true;
   }
 
   openFilters():void {
-    this.action = ActionWindow.Filters;
+    if (this.action != ActionWindow.Filters) {
+      this.restoreTransaction();
+      this.action = ActionWindow.Filters;
+    } else {
+      this.action = ActionWindow.None;
+    }
+   
   }
 
   openImportWindow():void {
-    this.action = ActionWindow.ImportWindow;
+    if (this.action != ActionWindow.ImportWindow) this.action = ActionWindow.ImportWindow;
+    else this.action = ActionWindow.None;
   }
 
   closeActionWindow():void {

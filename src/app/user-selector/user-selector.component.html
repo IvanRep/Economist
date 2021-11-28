@@ -1,0 +1,10 @@
+<input type="text" #userInput
+    [ngClass]="{'deposit' : type == transactionType.Deposit}" 
+    (input)="inputUser(userInput.value)"
+    (focus)="autocompleteUsers(userInput.value)" 
+    placeholder="{{type == transactionType.Deposit ? 'Usuario' : 'Beneficiario'}}"
+    list="users">
+
+<datalist id="users">
+    <option *ngFor="let user of arrayUsers" value="{{user}}">
+</datalist>

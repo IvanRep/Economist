@@ -4,13 +4,23 @@ export class Filters {
     private type:string
     private minimumAmount:number;
     private maximumAmount:number;
-    private since:string;
-    private until:string;
+    private since:any;
+    private until:any;
     private concept:string;
     private user:string;
 
     constructor() {
-        this.type = '';
+        this.type = 'Todos';
+        this.minimumAmount = 0;
+        this.maximumAmount = 999999999;
+        this.since = '';
+        this.until = '';
+        this.concept = '';
+        this.user = ''
+    }
+
+    public clear() {
+        this.type = 'Todos';
         this.minimumAmount = 0;
         this.maximumAmount = 999999999;
         this.since = '';
@@ -20,58 +30,64 @@ export class Filters {
     }
 
     //Getters
-    getType():string {
+    public getType():string {
         return this.type;
     }
-    getMinimumAmount():number {
+    public getMinimumAmount():number {
         return this.minimumAmount;
     }
-    getMaximumAmount():number {
+    public getStringMinimumAmount():any {
+        return this.minimumAmount==0 ? '' : this.minimumAmount;
+    }
+    public getMaximumAmount():number {
         return this.maximumAmount;
     }
-    getSince():any {
+    public getStringMaximumAmount():any {
+        return this.maximumAmount==999999999 ? '' : this.maximumAmount;
+    }
+    public getSince():Date {
         return this.since;
     }
 
-    getUntil():any {
+    public getUntil():Date {
         return this.until;
     }
 
-    getConcept():string {
+    public getConcept():string {
         return this.concept;
     }
-    getUser():string {
+    public getUser():string {
         return this.user;
     }
     //Setter
-    setType(type:string):void {
+    public setType(type:string):void {
         this.type = type;
     }
-    setMinumumAmount(minimumAmount:number):void {
+    public setMinumumAmount(minimumAmount:number):void {
         this.minimumAmount = minimumAmount;
     }
-    setMaximumAmount(maximumAmount:number):void {
+    public setMaximumAmount(maximumAmount:number):void {
         this.maximumAmount = maximumAmount;
     }
-    setSince(date:Date):void {
+    public setSince(date:Date):void {
         if (date instanceof Date) {
-            this.since = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+            this.since = date;
         } else {
             this.since = '';
         }
     
     }
-    setUntil(date:Date):void {
+    public setUntil(date:Date):void {
         if (date instanceof Date) {
-            this.until = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+            this.until = date;
         } else {
-            this.since = '';
+            this.until = '';
         }
     }
-    setConcept(concept:string):void {
+    public setConcept(concept:string):void {
         this.concept = concept;
     }
-    setUser(user:string):void {
+    public setUser(user:string):void {
         this.user = user;
     }
 }

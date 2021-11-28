@@ -1,0 +1,28 @@
+input {
+
+    border: solid 2px var(--main-color);
+    border-radius: 50px;
+    outline: none;
+    text-align: center;
+    color: var(--main-color);
+    font-weight: bolder;
+    font-size: 1em;
+    width: 100%;
+    align-self: center;
+}
+
+input::placeholder {
+    font-weight: lighter;
+    color: var(--main-color);
+}
+
+input.deposit ~ datalist {
+    color: var(--deposit-color);
+}
+
+input.deposit, input.deposit::placeholder {
+    border-color: var(--deposit-color);
+    color: var(--deposit-color);
+
+    transition: 1.5s;
+}
