@@ -12,7 +12,7 @@ export class EditTransactionComponent implements OnInit {
 
   transactionType = TransactionType;
   @Output() listTransactionsEmitter:EventEmitter<void> = new EventEmitter<void>();
-  @Output() updateTransactionEmitter:EventEmitter<string> = new EventEmitter<string>();
+  @Output() updateTransactionEmitter:EventEmitter<number> = new EventEmitter<number>();
 
   @Input() transaction:Transaction = new Transaction();
 
@@ -27,11 +27,11 @@ export class EditTransactionComponent implements OnInit {
   confirmTransaction():void {
     if (this.transaction.getAmount() != '' && this.transaction.getConcept() != '' && this.transaction.getUser() != '') {
       if (this.modify) {
-        this.transactionsService.updateTransaction(this.transaction.clone()).subscribe(() => alert('Transacción Modificada'));
+        this.transactionsService.updateTransaction(this.transaction.clone()).subscribe(() => this.updateTransaction());
       } else {
         this.transactionsService.newTransaction(this.transaction.clone()).subscribe(() => this.newTransaction());
       }
-      this.transaction.clear();
+      
       
     } else {
       alert('Rellena todos los campos');
@@ -39,12 +39,14 @@ export class EditTransactionComponent implements OnInit {
   }
 
   newTransaction() {
+    this.transaction.clear();
     this.listTransactionsEmitter.emit();
   }
 
-  updateTransaction(id:string) {
-    this.updateTransactionEmitter.emit(id);
-    alert('Transacción Modificada.');
+  updateTransaction() {
+    const amount = this.transaction.getType() == this.transactionType.Deposit ? this.transaction.getAmount() : -this.transaction.getAmount();
+
+    this.updateTransactionEmitter.emit(amount);
   }
 
   

@@ -1,4 +1,4 @@
-<input type="text" #userInput
+<input type="text" #userInput [value]="user"
     [ngClass]="{'deposit' : type == transactionType.Deposit}" 
     (input)="inputUser(userInput.value)"
     (focus)="autocompleteUsers(userInput.value)" 

@@ -16,6 +16,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DateSelectorComponent } from './date-selector/date-selector.component';
 import { UserSelectorComponent } from './user-selector/user-selector.component';
+import { PopupWindowComponent } from './popup-window/popup-window.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { UserSelectorComponent } from './user-selector/user-selector.component';
     AmountSelectorComponent,
     DateSelectorComponent,
     UserSelectorComponent,
+    PopupWindowComponent,
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule, BsDatepickerModule.forRoot(), BrowserAnimationsModule

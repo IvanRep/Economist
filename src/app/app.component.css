@@ -1,12 +1,13 @@
 header {
     display: grid;
-    grid-template-columns: 1fr 1fr 2fr 0.2fr;
+    box-sizing: border-box;
+    grid-template-columns: 1fr 1fr 2fr 0.4fr;
     grid-template-rows: 1fr;
 
     border-bottom: solid var(--main-color);
     align-items: center;
 }
-header>button {
+header button {
     display: grid;
     grid-template-columns: 1fr;
     height: 85%;
@@ -27,75 +28,118 @@ header>div {
     align-items: center;
     text-align: end;
     padding-right: 20%;
-
     font-size: calc(2em + 1vw);
     font-weight: bold;
     color: var(--main-color);
 }
-header>span {
-    color: var(--main-color);
-    font-size: calc(1.5em + 1vw);
-    cursor: pointer;
+
+header>div:last-child {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
-header>span::after {
-    align-content: center;
-    font-size: 0.5em;
-    content: '\25BC';
+
+header button.open_order {
+    box-sizing: border-box;
+    color: white;
+    border: none ;
+    width: 4vw;
+    height: 4vw;
+    border-radius: 100%;
+    background-color: var(--main-color);
+    margin: .5vw;
+}
+header button.open_order:hover {
+    border: solid 2px var(--main-color) !important;
+    color: var(--main-color);
+    background-color: white !important;
+}
+header .open_order span {
+    place-self: center;
+    font-size: calc(1.5rem + 1vw);
+}
+header>div>button:last-child {
+    box-sizing: border-box;
+    border: solid 2px var(--main-color);
+    border-radius: 100%;
+    width: 2vw;
+    height: 2vw;
+    margin: 0px 20%;
+    font-size: calc(.1rem + .7vw);
+    align-self:  center;
+}
+header>div>button:last-child:hover {
+    border: solid 2px var(--main-color) !important;
+}
+header>div>button:last-child.asc::after {
+    content: "\25b2";
+}
+header>div>button:last-child.asc:hover::after {
+    content: "\25bc";
+}
+header>div>button:last-child.desc::after {
+    content: "\25bc";
+}
+header>div>button:last-child.desc:hover::after {
+    content: "\25b2";
+}
+
+.nav_menu {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    padding: 0px !important;
+    padding-left: 1vw !important;
+}
+.nav_menu>div {
+    margin-right: 13vw;
 }
 
 .order-by {
-    position: absolute;
+    position: relative;
     display: grid;
-    grid-template-columns: 12.5vw 12.5vw 12.5vw 12.5vw;
-    
-    width: 50vw;
-    right: .5vw;
-    top: 5.2rem;
+    grid-template-columns: 3vw 3vw 3vw 3vw;
+    column-gap: 1vw;
 
-    z-index: 2;
-
-    visibility: hidden;
-    opacity: 0;
-
-    transition: 1s;
+    transform: translateX(50vw);
+    transition: 2.5s ease-out;
 }
 .order-by.open {
-    visibility: visible;
-    opacity: 1;
+    
+    transform: translateX(0);
+    
     outline: none;
 }
 .order-by>button {
 
     display: grid;
-    grid-template-rows: 1.5fr 1fr ;
     border: solid 2px var(--main-color);
     border-radius: 100%;
     color: var(--main-color);
     background-color: white;
     justify-self: center;
+    box-sizing: border-box;
+    margin: .00001vw;
 
     font-size: .5rem;
-    width: 5vw;
-    height: 5vw;
+    width: 3.5vw;
+    height: 3.5vw;
 
 }
 .order-by>button:hover {
+    border: solid 2px var(--main-color) !important;
     border-color: var(--main-color);
-    background-color: white !important;
+    color: white !important;
+    background-color: var(--main-color) !important;
 }
 
 .order-by>button>span {
     color: var(--main-color);
-    align-self: flex-end;
-    font-size: 2.2rem;
+    place-self: center;
+    font-size: calc(1rem + 1vw) ;
 }
-.order-by>button.asc::after {
-    content: '\25B2';
-    font-size: 2em;
-}
-.order-by>button.desc::after {
-    content: '\25BC';
-    font-size: 2em;
+.order-by>button:hover>span {
+    color: white;
+    font-size: calc(1.2rem + 1vw);
 }
 
 main {

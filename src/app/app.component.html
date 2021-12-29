@@ -1,5 +1,5 @@
 <header>
-  <button>
+  <button (click)="export()">
     <span class="material-icons">file_upload</span>
     <div>Exportar</div>
   </button>
@@ -8,29 +8,33 @@
     <div>Importar</div>
   </button>
 
-  <div>{{title}}</div>
-  <span class="material-icons" (click)="openOrderBy()">search</span>
-  <div class="order-by" tabindex="1" (focusout)="openOrderBy()">
+  <div class="nav_menu">
+    <div>{{title}}</div>
 
-    <button (click)="orderBy($event,transactions)" value="Fecha" class="desc">
-      <span class="material-icons">date_range</span>
-      Fecha
-    </button>
-    <button (click)="orderBy($event,transactions)" value="Tipo">
-      <span class="material-icons">title</span>
-      Tipo
-    </button>
-    <button (click)="orderBy($event,transactions)" value="Importe">
-      <span class="material-icons">euro_symbol</span>
-      Importe
-    </button>
-    <button (click)="orderBy($event,transactions)" value="Usuario">
-      <span class="material-icons">people</span>
-      Usuario
-    </button>
+    <div class="order-by" tabindex="1" (focusout)="openOrderBy()">
 
+      <button (click)="orderBy($event,transactions)" value="Fecha" class="desc">
+        <span class="material-icons">date_range</span>
+      </button>
+      <button (click)="orderBy($event,transactions)" value="Tipo">
+        <span class="material-icons">title</span>
+      </button>
+      <button (click)="orderBy($event,transactions)" value="Importe">
+        <span class="material-icons">euro_symbol</span>
+      </button>
+      <button (click)="orderBy($event,transactions)" value="Usuario">
+        <span class="material-icons">people</span>
+      </button>
+  
+    </div>
   </div>
-
+  <div>
+    <button class="open_order" (click)="openOrderBy()">
+      <span class="material-icons">search</span>
+    </button>
+    <button class="change_direction desc" (click)="setOrderDirection(transactions)">
+    </button>
+  </div>
 </header>
 <main>
   <nav>
@@ -43,7 +47,7 @@
   </nav>
   <div id="wAction">
       <div id="action" [ngSwitch]="action" [ngClass]="{'vacio' : action==0}">
-        <app-edit-transaction *ngSwitchCase="1" [modify]="modify" [transaction]="editTransaction" (listTransactionsEmitter)="listTransactions(transactions)"></app-edit-transaction>
+        <app-edit-transaction *ngSwitchCase="1" [modify]="modify" [transaction]="editTransaction" (listTransactionsEmitter)="listTransactions(transactions)" (updateTransactionEmitter)="updateTransaction($event)"></app-edit-transaction>
         <app-filters *ngSwitchCase="2" (listTransactionsEmitter)="listTransactions(transactions)"></app-filters>
         <app-import-window *ngSwitchCase="3"></app-import-window>
       </div>

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActionWindow } from './enums/ActionWindow.model';
 import { TransactionType } from './enums/TransactionType.model';
+import { PopupWindowComponent } from './popup-window/popup-window.component';
+import { TransactionsService } from './transactions.service';
 import { Transaction } from './transactions/transaction.model';
 import { TransactionsComponent } from './transactions/transactions.component';
 
@@ -27,7 +29,15 @@ export class AppComponent {
 
   action:ActionWindow = ActionWindow.None;
 
-  constructor() {}
+  constructor(private transactionService: TransactionsService) {}
+
+  export() {
+    this.transactionService.exportDatabase().subscribe(result => this.exportDialog(result));
+  }
+
+  exportDialog(file:any) {
+    const dialog = new PopupWindowComponent();
+  }
 
   openOrderBy() {
     const orderBy = document.querySelector('.order-by');
@@ -35,20 +45,14 @@ export class AppComponent {
       orderBy.classList.remove('open');
     } else {
       orderBy?.classList.add('open');
-      setTimeout(function() {(<HTMLDivElement>orderBy).focus({preventScroll:false})},100);
     }
   }
 
   orderBy(event: Event, transactions:TransactionsComponent) {
-
-    const previousOrder = document.querySelector('.asc,.desc');
-    previousOrder?.classList.remove('asc','desc');
     
     const button = (<HTMLButtonElement>event.currentTarget);
 
     this.order = button.value;
-    this.orderDirection == 'asc' ? this.orderDirection = 'desc' : this.orderDirection = 'asc';
-    button.classList.add(this.orderDirection);
     
     this.listTransactions(transactions);
   }
@@ -71,10 +75,18 @@ export class AppComponent {
     this.editTransaction.setConcept(this.backupTransaction.getConcept());
     this.editTransaction.setUser(this.backupTransaction.getUser());
     this.editTransaction.setAmount(this.backupTransaction.getAmount());
-  } 
+  }
 
-  getAction():ActionWindow {
-    return this.action;
+  updateTransaction(amount:number) {
+
+    //Quito del balance total el importe de la transacción que has sido modificada
+    this.backupTransaction.getType() == TransactionType.Deposit ? this.setEnteredAmount(-this.backupTransaction.getAmount()) : this.setAmountSpend(-this.backupTransaction.getAmount());
+    //Añado el nuevo importe al balance
+    amount>0 ? this.setEnteredAmount(amount) : this.setAmountSpend(-amount);
+
+    //Cambio el backup a la nueva transacción que se esta modificando
+    this.backupTransaction = new Transaction(this.editTransaction.getId(),this.editTransaction.getType(),this.editTransaction.getDate(),this.editTransaction.getConcept(),this.editTransaction.getUser(),this.editTransaction.getAmount());
+    this.action = ActionWindow.None;  
   }
 
   openNewTransaction():void {
@@ -118,6 +130,9 @@ export class AppComponent {
   }
 
   //Getters
+  getAction():ActionWindow {
+    return this.action;
+  }
   getTransactionsVolume():number {
     return this.transactionsVolume;
   }
@@ -136,5 +151,19 @@ export class AppComponent {
   }
   setAmountSpend(amountSpend:number) {
     this.amountSpend += amountSpend;
+  }
+  setOrderDirection(transactions:TransactionsComponent) {
+    const previousOrder = document.querySelector('.asc,.desc');
+    previousOrder?.classList.remove('asc','desc');
+
+    const orderButton = document.querySelector('header>div>button:last-child');
+    if (this.orderDirection == "asc") {
+      orderButton?.classList.add("desc");
+    } else {
+      orderButton?.classList.add("asc");
+    }
+    this.orderDirection == "asc" ? this.orderDirection = "desc" : this.orderDirection = "asc";
+
+    this.listTransactions(transactions);
   }
 }

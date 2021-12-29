@@ -50,6 +50,11 @@ export class TransactionsService {
     return this.http.get('http://192.168.1.56/php/getUsers.php?user='+user+'&type='+type,{responseType: 'json'});
   }
 
+  exportDatabase() {
+
+    return this.http.get('http://192.168.1.56/php/exportDatabase.php',{responseType: 'json'});
+  }
+
 
 
   //Setters
