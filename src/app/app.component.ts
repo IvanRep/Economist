@@ -91,7 +91,6 @@ export class AppComponent {
 
   openNewTransaction():void {
     if (this.action != ActionWindow.NewTransaction) {
-      this.restoreTransaction();
       this.action = ActionWindow.NewTransaction;
       this.modify = false;
     } else {
@@ -99,6 +98,7 @@ export class AppComponent {
     }
 
     this.editTransaction = new Transaction();
+    this.backupTransaction = new Transaction();
     
   }
 
