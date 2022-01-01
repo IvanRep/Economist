@@ -43,12 +43,15 @@ export class TransactionsComponent implements OnInit {
     this.transactions = [];
     this.order = order;
     this.orderDirection = orderDirection;
-    this.transactionsService.getTransactionsID(order, orderDirection).subscribe(result => this.createTransactions(result));
+    //this.transactionsService.getTransactionsID(order, orderDirection).subscribe(result => this.createTransactions(result));
+    this.transactionsService.getAllTransactions(order, orderDirection).subscribe(result => this.createTransactions(result));
   }
 
-  createTransactions(ids:any) {
-    for (let id of ids) {
-      this.transactions.push(new Transaction(id.id,TransactionType.All, '00/00/0000','concept','user',''));
+  createTransactions(result:any) {
+    for (let transaction of result) {
+      const dateSplitted = transaction.date.split("/");
+      const date = new Date(parseInt(dateSplitted[2]),parseInt(dateSplitted[1])-1,parseInt(dateSplitted[0]));
+      this.transactions.push(new Transaction(transaction.id,transaction.type, date, transaction.concept, transaction.user, transaction.amount));
     }
     this.emitTransactionsVolume(this.transactions.length);
   }

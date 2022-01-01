@@ -35,6 +35,13 @@ export class TransactionsService {
     return this.http.get('http://192.168.1.56/php/listarId.php?filters='+jsonFilters+'&order='+order+'&orderDirection='+orderDirection,{responseType: 'json'});
   }
 
+  getAllTransactions(order:string, orderDirection:string) {
+
+    const jsonFilters = JSON.stringify(this.filters);
+    
+    return this.http.get('http://192.168.1.56/php/getAllTransactions.php?filters='+jsonFilters+'&order='+order+'&orderDirection='+orderDirection,{responseType: 'json'});
+  }
+
   getTransaction(id:string) {
 
     return this.http.get('http://192.168.1.56/php/getTransaction.php?id='+id,{responseType: 'json'});

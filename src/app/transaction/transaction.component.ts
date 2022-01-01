@@ -16,7 +16,7 @@ export class TransactionComponent implements OnInit {
   @Output() transactionEmitter = new EventEmitter<Transaction>();
   @Input() id:string;
 
-  transaction:Transaction;
+  @Input() transaction:Transaction;
 
   transactionType:any = TransactionType;
 
@@ -29,10 +29,11 @@ export class TransactionComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.transactionsService.getTransaction(this.id).subscribe(result => this.getTransaction(result));
-
+    //this.transactionsService.getTransaction(this.id).subscribe(result => this.getTransaction(result));
+    this.emitAmount();
   }
 
+  /* Unused */
   getTransaction(transaction:any):void {
     this.transaction.setId(transaction.id);
     this.transaction.setStringType(transaction.tipo);
@@ -40,7 +41,6 @@ export class TransactionComponent implements OnInit {
     const dateSplitted = transaction.fecha.split("/");
     const date = new Date(parseInt(dateSplitted[2]),parseInt(dateSplitted[1])-1,parseInt(dateSplitted[0]));
     this.transaction.setDate(date);
-
     this.transaction.setConcept(transaction.concepto);
     this.transaction.setUser(transaction.usuario);
     this.transaction.setAmount(transaction.importe);
