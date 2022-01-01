@@ -6,6 +6,10 @@
     --deposit-concept-color: RGB(164, 242, 174);
     --highlight-color: RGB(255,223,0);
 }
+::selection {
+    color: white;
+    background-color: var(--main-color) !important;
+}
 html, body, app-root {
     height: 100vh; 
     max-height: 100vh; 

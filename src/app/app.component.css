@@ -18,6 +18,7 @@ header button {
     border: none;
     border-right: solid 3px var(--main-color);
     align-items: center;
+    transition: .5s;
 }
 header>button>span {
     position: absolute;
@@ -50,7 +51,7 @@ header button.open_order {
 }
 header button.open_order:hover {
     border: solid 2px var(--main-color) !important;
-    color: var(--main-color);
+    color: var(--main-color) !important;
     background-color: white !important;
 }
 header .open_order span {
@@ -191,9 +192,11 @@ nav>button {
 }
 nav>button>span {
     font-size: calc(2em + 0.5vw);
+    vertical-align: middle;
+    transition: .5s;
 }
 button:hover {
-    border-right: solid 7px !important;
+    font-size: 1.2rem !important;
 }
 main, main div, nav {
     max-height: 92vh;
