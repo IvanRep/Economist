@@ -29,7 +29,13 @@ export class AppComponent {
 
   action:ActionWindow = ActionWindow.None;
 
+  datetime = '';
+
   constructor(private transactionService: TransactionsService) {}
+
+  ngOnInit() {
+    this.startTime();
+  }
 
   export() {
     this.transactionService.exportDatabase().subscribe(result => this.exportDialog(result));
@@ -172,6 +178,30 @@ export class AppComponent {
     this.action = ActionWindow.None
   }
 
+
+  startTime() {
+
+    const date = new Date();
+    let hours = this.checkTime(date.getHours());
+    let minutes = this.checkTime(date.getMinutes());
+    let seconds = this.checkTime(date.getSeconds());
+
+    this.datetime = hours + ':' + minutes + ':' + seconds;
+
+    setTimeout(() => {this.startTime()}, 1000);
+  }
+
+  checkTime(number:number):string {
+
+    if (number<9) {
+      return number + '0';
+    }
+    return number.toString();
+    
+
+  }
+
+
   //Getters
   getAction():ActionWindow {
     return this.action;
@@ -190,10 +220,10 @@ export class AppComponent {
     this.transactionsVolume = transactionsVolume;
   }
   setEnteredAmount(enteredAmount:number) {
-    this.enteredAmount += enteredAmount;
+    setTimeout(() =>{this.enteredAmount += enteredAmount},1500);
   }
   setAmountSpend(amountSpend:number) {
-    this.amountSpend += amountSpend;
+    setTimeout(() =>{this.amountSpend += amountSpend},1500);
   }
   setOrderDirection(transactions:TransactionsComponent) {
     const previousOrder = document.querySelector('.asc,.desc');

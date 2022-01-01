@@ -28,7 +28,6 @@ export class TransactionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     //this.transactionsService.getTransaction(this.id).subscribe(result => this.getTransaction(result));
     this.emitAmount();
   }
@@ -96,6 +95,11 @@ export class TransactionComponent implements OnInit {
     this.deleteTransactionEmitter.emit(this.transaction.getId());
 
     
+  }
+
+  sleep(delay:any) {
+    var start = new Date().getTime();
+    while (new Date().getTime() < start + delay);
   }
 
   //Setters

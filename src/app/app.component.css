@@ -201,3 +201,12 @@ button:hover {
 main, main div, nav {
     max-height: 92vh;
 }
+
+.datetime {
+    align-self: flex-end;
+    justify-self: center;
+    color: var(--main-color);
+    font-weight: bold;
+    font-size: calc(1rem + 1vh);
+    margin-bottom: 4vh;
+}

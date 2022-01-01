@@ -44,6 +44,7 @@
     <button (click)="openFilters()">
       <span class="material-icons">search</span>
     </button>
+    <div class="datetime">{{datetime}}</div>
   </nav>
   <div id="wAction">
       <div id="action" [ngSwitch]="action" [ngClass]="{'vacio' : action==0}">
