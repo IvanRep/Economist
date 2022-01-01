@@ -11,9 +11,9 @@
   <div class="nav_menu">
     <div>{{title}}</div>
 
-    <div class="order-by" tabindex="1" (focusout)="openOrderBy()">
+    <div class="order-by" tabindex="1">
 
-      <button (click)="orderBy($event,transactions)" value="Fecha" class="desc">
+      <button (click)="orderBy($event,transactions)" value="Fecha" disabled>
         <span class="material-icons">date_range</span>
       </button>
       <button (click)="orderBy($event,transactions)" value="Tipo">

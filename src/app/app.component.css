@@ -141,6 +141,12 @@ header>div>button:last-child.desc:hover::after {
     color: white;
     font-size: calc(1.2rem + 1vw);
 }
+.order-by>button:disabled, .order-by>button:disabled>span {
+    cursor: auto;
+    color: white;
+    background-color: var(--main-color);
+    font-size: calc(1rem + 1vw) ;
+}
 
 main {
     display: grid;

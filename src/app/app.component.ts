@@ -39,6 +39,9 @@ export class AppComponent {
     const dialog = new PopupWindowComponent();
   }
 
+  /**
+   * Despliega los botones que sirven para modificar el orden de las transacciones
+   */
   openOrderBy() {
     const orderBy = document.querySelector('.order-by');
     if (orderBy?.classList.contains('open')) {
@@ -48,15 +51,33 @@ export class AppComponent {
     }
   }
 
+  /**
+   * 
+   * @param event 
+   * @param transactions
+   * Modifica la columna por la que son ordenadas las transacciones dependiendo del botón que se haya pulsado, luego vuelve a listar las transacciones
+   */
   orderBy(event: Event, transactions:TransactionsComponent) {
     
+    (<HTMLButtonElement>document.querySelector('.order-by>button:disabled')).disabled = false; //Vuelvo ha habilitar el anterior boton seleccionado
+
+    const openOrderButton = document.querySelector('button.open_order');
     const button = (<HTMLButtonElement>event.currentTarget);
 
     this.order = button.value;
     
+     //Cambio el icono que tiene el boton open_order por el del boton seleccionado y lo deshabilito 
+    (<HTMLButtonElement>openOrderButton).innerHTML = button.innerHTML;
+    button.disabled = true;
+
     this.listTransactions(transactions);
   }
 
+  /**
+   * 
+   * @param transactions 
+   * Lista las transacciones
+   */
   listTransactions(transactions:TransactionsComponent) {
     this.amountSpend = 0;
     this.enteredAmount = 0;
@@ -65,6 +86,9 @@ export class AppComponent {
     transactions.getTransactions(this.order,this.orderDirection);
   }
 
+  /**
+   * Restaura los datos de la transaccion que se esta editando (editTransaction) con los datos guardados en backupTransaction
+   */
   restoreTransaction() {
 
     if (this.action == ActionWindow.NewTransaction && this.modify == true) this.action = ActionWindow.None;
@@ -89,6 +113,9 @@ export class AppComponent {
     this.action = ActionWindow.None;  
   }
 
+  /**
+   *   Abre la ventana para insertar nuevas transacciones
+   */
   openNewTransaction():void {
     if (this.action != ActionWindow.NewTransaction) {
       this.action = ActionWindow.NewTransaction;
@@ -97,11 +124,18 @@ export class AppComponent {
       this.action = ActionWindow.None;
     }
 
+    //Reseteo la transacción a editar y el backup por si se ha seleccionado alguna
     this.editTransaction = new Transaction();
     this.backupTransaction = new Transaction();
     
   }
 
+  /**
+   * 
+   * @param transaction 
+   * Abre la ventana para modificar una transacción que recibe como parametro
+   * 
+   */
   openEditTransaction(transaction:Transaction):void {
     
     this.action = ActionWindow.NewTransaction;
@@ -110,6 +144,9 @@ export class AppComponent {
     this.modify = true;
   }
 
+  /**
+   * Abre la ventana para controlar los filtros que actuan sobre las transacciones
+   */
   openFilters():void {
     if (this.action != ActionWindow.Filters) {
       this.restoreTransaction();
@@ -120,11 +157,17 @@ export class AppComponent {
    
   }
 
+  /**
+   * Abre la ventana para restaurar los datos de la bd desde un archivo sql
+   */
   openImportWindow():void {
     if (this.action != ActionWindow.ImportWindow) this.action = ActionWindow.ImportWindow;
     else this.action = ActionWindow.None;
   }
 
+  /**
+   * Metodo para cerrar la ventana de acción (Vuelve al estado por defecto de la página)
+   */
   closeActionWindow():void {
     this.action = ActionWindow.None
   }
