@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TransactionType } from '../enums/TransactionType.model';
+import { PopUpWindow } from '../popup-window/popup-window.model';
 import { TransactionsService } from '../transactions.service';
 import { Transaction } from '../transactions/transaction.model';
 
@@ -94,14 +95,21 @@ export class TransactionComponent implements OnInit {
 
   deleteTransaction():void {
 
-    this.transactionsService.deleteTransaction(this.getId()).subscribe();
+    const del = () => {
+  
+      this.transactionsService.deleteTransaction(this.getId()).subscribe();
 
-    //Emito la cantidad contraria al amount para que se actualice el balance
-    this.amountEmitter.emit(
-      this.transaction.getType()==TransactionType.Deposit?-this.transaction.getAmount():this.transaction.getAmount()
-    );
-    //Borro la transacción de la lista de id del padre
-    this.deleteTransactionEmitter.emit(this.transaction.getId());
+      //Emito la cantidad contraria al amount para que se actualice el balance
+      this.amountEmitter.emit(
+        this.transaction.getType()==TransactionType.Deposit?-this.transaction.getAmount():this.transaction.getAmount()
+      );
+      //Borro la transacción de la lista de id del padre
+      this.deleteTransactionEmitter.emit(this.transaction.getId());
+    }
+
+    const popup = new PopUpWindow('Eliminar Transacción','¿Está seguro de que quiere eliminar la transacción?', del);
+
+    popup.printWindow();
 
     
   }

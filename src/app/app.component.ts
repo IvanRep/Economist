@@ -45,13 +45,13 @@ export class AppComponent {
    * Recibe un evento del teclado y comprueba si es un atajo rápido para algun evento
    */
   checkShortcuts(event:KeyboardEvent) {
-    if (event.key == 'n') {
+    if (event.ctrlKey && event.key == 'n') {
       this.openNewTransaction();
     }
-    if (event.key == 'f') {
+    if (event.ctrlKey && event.key == 'f') {
       this.openFilters();
     }
-    if (event.key == 'o') {
+    if (event.ctrlKey && event.key == 'o') {
       this.openOrderBy();
     }
   }
