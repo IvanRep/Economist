@@ -23,12 +23,80 @@ export class TransactionsComponent implements OnInit {
   order = 'Fecha';
   orderDirection = 'desc';
 
+  selectedTransaction = -1;
+  controlKeyDown:boolean = false;
+
   constructor(private transactionsService:TransactionsService) { 
     this.title = 'Transacciones Realizadas';
     this.transactions = [
     ];
 
     this.getTransactions(this.order,this.orderDirection);
+  }
+
+  ngOnInit(): void {
+    document.addEventListener('keydown',(event) => {this.keyDownEvent(event)}, false);
+
+  }
+
+  keyDownEvent(event:KeyboardEvent) {
+    //Pulsar control
+    if (event.ctrlKey) {
+      this.controlKeyDown = true;
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    //Mover hacia abajo
+    if (event.ctrlKey && event.key == 's' || event.key == 'ArrowDown') {
+      if (this.selectedTransaction >= 0 && this.selectedTransaction < this.transactions.length)
+        this.transactions[this.selectedTransaction].setSelected(false);
+
+      if ((this.selectedTransaction += 1) >= this.transactions.length) {
+        this.selectedTransaction = 0;
+      }
+      // Revisión --------------------------------------------------------
+      if (this.transactions[this.selectedTransaction].isSelected()) {
+        this.transactions[this.selectedTransaction].setSelected(false);
+      }
+      setTimeout( () => {this.transactions[this.selectedTransaction].setSelected(true)});
+      // -----------------------------------------------------------------
+      setTimeout(() => {(<HTMLDivElement>document.querySelector('#transaction.selected')).focus({preventScroll:false})})
+
+    }
+    //Mover hacia arriba
+    if (event.ctrlKey && event.key == 'a' || event.key == 'ArrowUp') {
+      if (this.selectedTransaction >= 0 && this.selectedTransaction < this.transactions.length)
+        this.transactions[this.selectedTransaction].setSelected(false);
+
+      if ((this.selectedTransaction -= 1) < 0) {
+        this.selectedTransaction = this.transactions.length-1;
+      }
+      // Revisión --------------------------------------------------------
+      if (this.transactions[this.selectedTransaction].isSelected()) {
+        this.transactions[this.selectedTransaction].setSelected(false);
+      }
+      setTimeout( () => {this.transactions[this.selectedTransaction].setSelected(true)});
+      // -----------------------------------------------------------------
+      setTimeout(() => {(<HTMLDivElement>document.querySelector('#transaction.selected')).focus({preventScroll:false})})
+    }
+    //Seleccionar transacción
+    if (event.key == 'Enter' || event.key == 'e') {
+      (<HTMLButtonElement>document.querySelector('.options.selected>button:first-of-type')).click();
+    }
+    /*if (event.key == 'Return') {
+      (<HTMLButtonElement>document.querySelector('.options.selected>button:last-child')).click();
+    }
+    */
+  }
+
+  selectTransaction(transaction:Transaction) {
+    for (let i = 0; i<this.transactions.length; i++) {
+      if (this.transactions[i] == transaction) {
+        this.selectedTransaction = i;
+      }
+
+    }
   }
 
   deleteTransaction(id:string) {
@@ -51,9 +119,12 @@ export class TransactionsComponent implements OnInit {
     for (let transaction of result) {
       const dateSplitted = transaction.date.split("/");
       const date = new Date(parseInt(dateSplitted[2]),parseInt(dateSplitted[1])-1,parseInt(dateSplitted[0]));
-      this.transactions.push(new Transaction(transaction.id,transaction.type, date, transaction.concept, transaction.user, transaction.amount));
+      setTimeout(() => {
+        this.transactions.push(new Transaction(transaction.id,transaction.type, date, transaction.concept, transaction.user, transaction.amount))
+        this.emitTransactionsVolume(this.transactions.length);
+      },100);
     }
-    this.emitTransactionsVolume(this.transactions.length);
+    
   }
 
   setBalance(amount:number) {
@@ -79,9 +150,6 @@ export class TransactionsComponent implements OnInit {
 
   emitAmountSpend(amount:number) {
     this.amountSpendEmitter.emit(amount);
-  }
-
-  ngOnInit(): void {
   }
 
 }

@@ -1,5 +1,6 @@
 section {
     display: flex;
+    box-sizing: border-box;
     flex-direction: row;
     flex-wrap: nowrap;
     margin: 5% 0%;
@@ -8,19 +9,25 @@ section {
 }
 #transaction {
     display: flex;
+    box-sizing: border-box;
     flex-direction: column;
     flex: 1 0 auto;
     min-height: 25vh;
 
-    border: solid var(--main-color);
+    border: solid 3px var(--main-color);
     border-radius: 50px;
     color: var(--main-color);
+    outline: none;
     
     overflow: hidden;
     padding-bottom: 2%;
 
-    transition: 2s;
+    transition: 2s, border .2s;
     cursor: pointer;
+}
+#transaction:hover{
+    border-width: 4px;
+    
 }
 section:first-of-type {
     margin-top: 0%;

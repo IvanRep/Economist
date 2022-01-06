@@ -35,6 +35,25 @@ export class AppComponent {
 
   ngOnInit() {
     this.startTime();
+    document.addEventListener('keypress', (event) => {this.checkShortcuts(event)}, false)
+
+  }
+
+  /**
+   * 
+   * @param event 
+   * Recibe un evento del teclado y comprueba si es un atajo rápido para algun evento
+   */
+  checkShortcuts(event:KeyboardEvent) {
+    if (event.key == 'n') {
+      this.openNewTransaction();
+    }
+    if (event.key == 'f') {
+      this.openFilters();
+    }
+    if (event.key == 'o') {
+      this.openOrderBy();
+    }
   }
 
   export() {
@@ -193,8 +212,8 @@ export class AppComponent {
 
   checkTime(number:number):string {
 
-    if (number<9) {
-      return number + '0';
+    if (number<=9) {
+      return '0' + number;
     }
     return number.toString();
     
@@ -220,10 +239,10 @@ export class AppComponent {
     this.transactionsVolume = transactionsVolume;
   }
   setEnteredAmount(enteredAmount:number) {
-    setTimeout(() =>{this.enteredAmount += enteredAmount},1500);
+    this.enteredAmount += enteredAmount;
   }
   setAmountSpend(amountSpend:number) {
-    setTimeout(() =>{this.amountSpend += amountSpend},1500);
+    this.amountSpend += amountSpend;
   }
   setOrderDirection(transactions:TransactionsComponent) {
     const previousOrder = document.querySelector('.asc,.desc');

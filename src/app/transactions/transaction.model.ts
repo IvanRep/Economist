@@ -8,14 +8,16 @@ export class Transaction {
     concept:string;
     user:string;
     private amount:string;
+    selected:boolean
 
-    constructor(id:string = '', type:TransactionType = TransactionType.Deposit, date:any = new Date(), concept:string = '', user:string = '', amount:string = '') {
+    constructor(id:string = '', type:TransactionType = TransactionType.Deposit, date:any = new Date(), concept:string = '', user:string = '', amount:string = '', selected:boolean = false) {
         this.id = id;
         this.type = type;
         this.date = date;
         this.concept = concept;
         this.user = user;
         this.amount = amount;
+        this.selected = selected;
     }
 
     public clone():Transaction {
@@ -69,6 +71,9 @@ export class Transaction {
     }
     public setAmount(amount:string):void {
         this.amount = amount;
+    }
+    public setSelected(selected:boolean):void {
+      this.selected = selected;
     }
     //Getters
     public getId():string {
@@ -125,5 +130,9 @@ export class Transaction {
     public getFormatAmount() {
         const format = Intl.NumberFormat('es', {maximumFractionDigits: 2, minimumFractionDigits: 2});
         return format.format(parseFloat(this.amount));
+    }
+
+    public isSelected() {
+      return this.selected;
     }
 }

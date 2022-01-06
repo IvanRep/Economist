@@ -10,6 +10,9 @@
     color: white;
     background-color: var(--main-color) !important;
 }
+.deposit ::selection {
+    background-color: var(--deposit-color) !important;
+}
 html, body, app-root {
     height: 100vh; 
     max-height: 100vh; 
@@ -17,7 +20,7 @@ html, body, app-root {
     overflow-y: hidden;
 
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: auto;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
 
 app-root {
     display: grid;

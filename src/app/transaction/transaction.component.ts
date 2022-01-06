@@ -13,6 +13,7 @@ export class TransactionComponent implements OnInit {
   @Output() deleteTransactionEmitter = new EventEmitter<string>();
   @Output() restoreTransactionEmitter = new EventEmitter<void>();
   @Output() amountEmitter = new EventEmitter<number>();
+  @Output() transactionSelectedEmitter = new EventEmitter<Transaction>();
   @Output() transactionEmitter = new EventEmitter<Transaction>();
   @Input() id:string;
 
@@ -31,6 +32,7 @@ export class TransactionComponent implements OnInit {
     //this.transactionsService.getTransaction(this.id).subscribe(result => this.getTransaction(result));
     this.emitAmount();
   }
+  
 
   /* Unused */
   getTransaction(transaction:any):void {
@@ -69,11 +71,18 @@ export class TransactionComponent implements OnInit {
   
     if (transaction.classList.contains('selected')) {
       this.restoreTransactionEmitter.emit();
-      transaction.classList.remove('selected');
-      transaction.parentElement?.querySelector('.options')?.classList.remove('selected');
+      /*transaction.classList.remove('selected');
+      transaction.parentElement?.querySelector('.options')?.classList.remove('selected');*/
+      this.transaction.setSelected(false);
     } else {
-      transaction.classList.add('selected');
-      transaction.parentElement?.querySelector('.options')?.classList.add('selected');
+      // Revisión --------------------------------------------------------------------------
+      if (this.transaction.isSelected()) {
+        transaction.classList.add('selected');
+        transaction.parentElement?.querySelector('.options')?.classList.add('selected');
+      }
+      // -----------------------------------------------------------------------------------
+      this.transaction.setSelected(true);
+      this.transactionSelectedEmitter.emit(this.transaction);
     }
   }
 
