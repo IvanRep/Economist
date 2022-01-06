@@ -35,7 +35,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.startTime();
-    document.addEventListener('keypress', (event) => {this.checkShortcuts(event)}, false)
+    document.addEventListener('keydown', (event) => {this.checkShortcuts(event)}, false)
 
   }
 
@@ -45,6 +45,10 @@ export class AppComponent {
    * Recibe un evento del teclado y comprueba si es un atajo rápido para algun evento
    */
   checkShortcuts(event:KeyboardEvent) {
+    if (event.ctrlKey) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
     if (event.ctrlKey && event.key == 'n') {
       this.openNewTransaction();
     }
