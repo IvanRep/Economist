@@ -101,7 +101,7 @@ header>div>button:last-child.desc:hover::after {
     grid-template-columns: 3vw 3vw 3vw 3vw;
     column-gap: 1vw;
 
-    transform: translateX(35vw);
+    transform: translateX(20vw);
     transition: 2.5s ease-out;
 }
 .order-by.open {

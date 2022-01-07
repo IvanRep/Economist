@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActionWindow } from './enums/ActionWindow.model';
 import { TransactionType } from './enums/TransactionType.model';
 import { PopupWindowComponent } from './popup-window/popup-window.component';
+import { PopUpWindow } from './popup-window/popup-window.model';
 import { TransactionsService } from './transactions.service';
 import { Transaction } from './transactions/transaction.model';
 import { TransactionsComponent } from './transactions/transactions.component';
@@ -49,23 +50,36 @@ export class AppComponent {
       event.preventDefault();
       event.stopPropagation();
     }
-    if (event.ctrlKey && event.key == 'n') {
+    if (event.altKey && event.key == 'n') {
       this.openNewTransaction();
     }
-    if (event.ctrlKey && event.key == 'f') {
+    if ((event.altKey || event.altKey) && event.key == 'f') {
       this.openFilters();
     }
-    if (event.ctrlKey && event.key == 'o') {
+    if ((event.altKey || event.ctrlKey) && event.key == 'o') {
       this.openOrderBy();
     }
   }
 
   export() {
+
     this.transactionService.exportDatabase().subscribe(result => this.exportDialog(result));
+
   }
 
   exportDialog(file:any) {
-    const dialog = new PopupWindowComponent();
+
+    const exportDocument = () => {
+      const element = document.createElement('a');
+      element.setAttribute('href','http://192.168.1.56/Copias_de_seguridad/'+file.toString());
+      element.setAttribute('download', file);
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+    }
+
+    const popup = new PopUpWindow('Transacciones Exportadas','¿Quieres guardar una copia en tu ordenador?', exportDocument);
+    popup.printWindow();
   }
 
   /**

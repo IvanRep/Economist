@@ -59,7 +59,11 @@ export class TransactionsService {
 
   exportDatabase() {
 
-    return this.http.get('http://192.168.1.56/php/exportDatabase.php',{responseType: 'json'});
+    return this.http.get('http://192.168.1.56/php/exportDatabase.php',{responseType: 'text' as const});
+  }
+
+  importDatabase(filename:string) {
+    return this.http.get('http://192.168.1.56/php/import.php?filename='+filename);
   }
 
 

@@ -49,6 +49,8 @@ export class TransactionsComponent implements OnInit {
 
     //Mover hacia abajo
     if (event.ctrlKey && event.key == 's' || event.key == 'ArrowDown') {
+      event.preventDefault();
+      
       if (this.selectedTransaction >= 0 && this.selectedTransaction < this.transactions.length)
         this.transactions[this.selectedTransaction].setSelected(false);
 
@@ -66,6 +68,8 @@ export class TransactionsComponent implements OnInit {
     }
     //Mover hacia arriba
     if (event.ctrlKey && event.key == 'a' || event.key == 'ArrowUp') {
+      event.preventDefault();
+
       if (this.selectedTransaction >= 0 && this.selectedTransaction < this.transactions.length)
         this.transactions[this.selectedTransaction].setSelected(false);
 

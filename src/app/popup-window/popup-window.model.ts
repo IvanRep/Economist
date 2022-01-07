@@ -32,7 +32,7 @@ export class PopUpWindow {
         .addEventListener("click", (event) => {event.stopPropagation()}, false);
         //onclick de los botones
         (<HTMLButtonElement>document.querySelector('div.pop-up>button:first-of-type'))
-        .addEventListener("click", () => {this.confirmMethod()}, false);
+        .addEventListener("click", () => {this.confirmMethod(); this.cancel()}, false);
         (<HTMLButtonElement>document.querySelector('div.pop-up>button:last-of-type'))
         .addEventListener("click", () => {this.cancel()}, false);
 
