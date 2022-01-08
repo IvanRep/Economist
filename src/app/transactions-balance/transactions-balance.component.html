@@ -1,9 +1,9 @@
 <main [ngClass]="{'notSpreaded' : action!=0}">
     <div>
-        <div id="balance">{{getBalance()}} €</div>
+        <div id="balance">{{getBalance()}}€</div>
         <div id="transactions">{{getTransactionsVolume()}} Transacciones</div> 
-        <div id="enteredAmount">{{getEnteredAmount()}} € Ingresados</div>
-        <div id="amountSpend">{{getAmountSpend()}} € Gastados</div>
+        <div id="enteredAmount">{{getEnteredAmount()}}€ Ingresados</div>
+        <div id="amountSpend">{{getAmountSpend()}}€ Gastados</div>
     </div>
     <button (click)="onOpenFilters()">
         <span class="material-icons">search</span>

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActionWindow } from './enums/ActionWindow.model';
 import { TransactionType } from './enums/TransactionType.model';
-import { PopupWindowComponent } from './popup-window/popup-window.component';
 import { PopUpWindow } from './popup-window/popup-window.model';
 import { TransactionsService } from './transactions.service';
 import { Transaction } from './transactions/transaction.model';
@@ -46,10 +45,18 @@ export class AppComponent {
    * Recibe un evento del teclado y comprueba si es un atajo rápido para algun evento
    */
   checkShortcuts(event:KeyboardEvent) {
+    
     if (event.ctrlKey) {
       event.preventDefault();
       event.stopPropagation();
     }
+    
+    //Si hay una ventana emergente, sale de la función sin hacer nada
+     const popup = (<HTMLDivElement>document.querySelector('div.pop-up-container'));
+     if (popup) {
+       return;
+     }
+
     if (event.altKey && event.key == 'n') {
       this.openNewTransaction();
     }
@@ -138,7 +145,7 @@ export class AppComponent {
 
     this.editTransaction.setId(this.backupTransaction.getId());
     this.editTransaction.setType(this.backupTransaction.getType());
-    this.editTransaction.setDate(this.backupTransaction.getDate());
+    this.editTransaction.setDate(this.backupTransaction.getDate(), true);
     this.editTransaction.setConcept(this.backupTransaction.getConcept());
     this.editTransaction.setUser(this.backupTransaction.getUser());
     this.editTransaction.setAmount(this.backupTransaction.getAmount());

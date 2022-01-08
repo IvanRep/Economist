@@ -72,14 +72,18 @@ button:hover {
     place-self: center;
 }
 .pop-up-container .title {
+    text-align: center;
     font-size: calc(1rem + 1.5vmin);
     font-weight: bold;
 }
 .pop-up-container .body {
+    text-align: center;
     font-size: calc(1rem + .5vmin);
 }
 
 .pop-up-container button {
+    outline: none;
+    box-sizing: border-box;
     padding: .5vmin;
     width: 7vw;
     height: 5;
@@ -92,6 +96,7 @@ button:hover {
 }
 .pop-up-container button:first-of-type {
     background-color: var(--main-color);
+    border-color: var(--main-color);
 }
 
 .pop-up-container button:last-of-type {

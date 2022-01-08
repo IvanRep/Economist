@@ -39,18 +39,24 @@ export class TransactionsComponent implements OnInit {
 
   }
 
-  keyDownEvent(event:KeyboardEvent) {
+  keyDownEvent(event:KeyboardEvent) {  
     //Pulsar control
     if (event.ctrlKey) {
-      this.controlKeyDown = true;
       event.preventDefault();
       event.stopPropagation();
     }
+    
+    //Si hay una ventana emergente, sale de la función sin hacer nada
+    const popup = (<HTMLDivElement>document.querySelector('div.pop-up-container'));
+    if (popup) {
+      return;
+    }
 
     //Mover hacia abajo
-    if (event.ctrlKey && event.key == 's' || event.key == 'ArrowDown') {
+    if (event.altKey && event.key == 's' || event.key == 'ArrowDown') {
       event.preventDefault();
-      
+      this.restoreTransactionEmitter.emit();
+
       if (this.selectedTransaction >= 0 && this.selectedTransaction < this.transactions.length)
         this.transactions[this.selectedTransaction].setSelected(false);
 
@@ -67,8 +73,9 @@ export class TransactionsComponent implements OnInit {
 
     }
     //Mover hacia arriba
-    if (event.ctrlKey && event.key == 'a' || event.key == 'ArrowUp') {
+    if (event.altKey && event.key == 'w' || event.key == 'ArrowUp') {
       event.preventDefault();
+      this.restoreTransactionEmitter.emit();
 
       if (this.selectedTransaction >= 0 && this.selectedTransaction < this.transactions.length)
         this.transactions[this.selectedTransaction].setSelected(false);
@@ -84,14 +91,20 @@ export class TransactionsComponent implements OnInit {
       // -----------------------------------------------------------------
       setTimeout(() => {(<HTMLDivElement>document.querySelector('#transaction.selected')).focus({preventScroll:false})})
     }
-    //Seleccionar transacción
+    //Comprobar que haya una transacction seleccionada
+    const selectedTransaction = (<HTMLDivElement>document.querySelector('#transaction.selected:focus'));
+    if (!selectedTransaction)
+      return;
+
+    //Editar transacción
     if (event.key == 'Enter' || event.key == 'e') {
-      (<HTMLButtonElement>document.querySelector('.options.selected>button:first-of-type')).click();
+      (<HTMLButtonElement>document.querySelector('.options.selected>button:first-of-type'))?.click();
     }
-    /*if (event.key == 'Return') {
-      (<HTMLButtonElement>document.querySelector('.options.selected>button:last-child')).click();
+    //Borrar transacción
+    if (event.key == 'Backspace' || event.key == 'Delete') {
+      (<HTMLButtonElement>document.querySelector('.options.selected>button:last-of-type'))?.click();
     }
-    */
+    console.log(event.key);
   }
 
   selectTransaction(transaction:Transaction) {
@@ -122,7 +135,7 @@ export class TransactionsComponent implements OnInit {
   createTransactions(result:any) {
     for (let transaction of result) {
       const dateSplitted = transaction.date.split("/");
-      const date = new Date(parseInt(dateSplitted[2]),parseInt(dateSplitted[1])-1,parseInt(dateSplitted[0]));
+      const date = new Date(parseInt(dateSplitted[2]),parseInt(dateSplitted[1])-1,parseInt(dateSplitted[0]),parseInt(dateSplitted[3]),parseInt(dateSplitted[4]),parseInt(dateSplitted[5]));
       setTimeout(() => {
         this.transactions.push(new Transaction(transaction.id,transaction.type, date, transaction.concept, transaction.user, transaction.amount))
         this.emitTransactionsVolume(this.transactions.length);

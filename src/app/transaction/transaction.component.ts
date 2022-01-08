@@ -90,6 +90,7 @@ export class TransactionComponent implements OnInit {
   editTransaction():void {
  
     this.transactionEmitter.emit(this.transaction);
+    setTimeout(() => {(<HTMLInputElement>document.querySelector('app-amount-selector input')).focus();});
 
   }
 
@@ -110,6 +111,8 @@ export class TransactionComponent implements OnInit {
     const popup = new PopUpWindow('Eliminar Transacción','¿Está seguro de que quiere eliminar la transacción?', del);
 
     popup.printWindow();
+
+    setTimeout(() => {(<HTMLButtonElement>document.querySelector('.pop-up>button:first-of-type')).focus();});
 
     
   }

@@ -60,8 +60,13 @@ export class Transaction {
                 this.type = TransactionType.Deposit;        
         }
     }
-    public setDate(date:Date):void {
-        this.date = date;
+    public setDate(date:Date, edit = false):void {
+      if (edit) {
+        date.setHours(this.date.getHours());
+        date.setMinutes(this.date.getMinutes());
+        date.setSeconds(this.date.getSeconds());
+      } 
+      this.date = date;
     }
     public setConcept(concept:string):void {
         this.concept = concept;

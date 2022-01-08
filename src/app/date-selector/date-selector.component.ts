@@ -22,6 +22,7 @@ export class DateSelectorComponent implements OnInit {
   }
 
   setDate(date:any) {
+    
     this.dateValue = date;
 
     this.dateEmitter.emit(date);

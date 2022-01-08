@@ -18,7 +18,7 @@ export class PopUpWindow {
             <div class="title">`+this.title+`</div>
             <div class="body">`+this.body+`</div>
             <button>Confirmar</button>
-            <button onclick="`+this.cancel+`">Cancelar</button>
+            <button>Cancelar</button>
         </div>
         `;
 
@@ -27,6 +27,7 @@ export class PopUpWindow {
         popup.innerHTML = html;
         document.body.insertBefore(popup,null);
 
+        document.addEventListener("keydown", (event) => {this.keyListener(event)});
         popup.addEventListener("click", () => {this.cancel()}, false);
         (<HTMLDivElement>document.querySelector('div.pop-up'))
         .addEventListener("click", (event) => {event.stopPropagation()}, false);
@@ -36,11 +37,19 @@ export class PopUpWindow {
         (<HTMLButtonElement>document.querySelector('div.pop-up>button:last-of-type'))
         .addEventListener("click", () => {this.cancel()}, false);
 
+
     }
 
     cancel() {
         const popup = (<HTMLDivElement>document.querySelector('div.pop-up-container')); 
+        document.removeEventListener("keydown", (event) => {this.keyListener(event)});
         popup.parentNode?.removeChild(popup);
-    }
+   }
+
+   keyListener(event:KeyboardEvent) {
+        //Si se pulsa Esc se cierra el pop up
+        if (event.key == 'Escape') this.cancel();
+
+   }
 
 }

@@ -26,7 +26,8 @@ export class ImportWindowComponent implements OnInit {
     const popup = new PopUpWindow('Importar Copia de Seguridad','¿Esta seguro de que quiere restaurar la copia de seguridad '+filename+'?', 
     () => {
       this.transactionsService.exportDatabase().subscribe();
-      this.transactionsService.importDatabase(filename+'.sql').subscribe();
+      this.transactionsService.importDatabase(filename+'.sql').subscribe(() => {location.reload();});
+      
     });
 
     popup.printWindow();

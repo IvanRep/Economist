@@ -85,15 +85,16 @@ app-user-selector {
 }
 
 main button {
+    box-sizing: border-box;
     grid-column-start: 1;
     grid-column-end: 3;
-
     margin-top: 2vh;
     color: white;
     background-color: var(--main-color);
     font-weight: bold;
     font-size: calc(0.5em + 1vw);
     border: none;
+    border-top: solid 2px var(--main-color);
 }
 main>button:hover {
     color: var(--main-color);

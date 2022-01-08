@@ -17,16 +17,26 @@ export class EditTransactionComponent implements OnInit {
   @Input() transaction:Transaction = new Transaction();
 
   @Input() modify:boolean = false;
+  backupDate:Date = new Date();
 
   constructor(private transactionsService:TransactionsService) { }
 
   ngOnInit(): void {
     if (this.transaction.getType() == undefined) this.transaction.setType(TransactionType.Deposit);
+
+    if (this.modify) {
+      this.backupDate = new Date(this.transaction.getDate());
+    }
   }
 
   confirmTransaction():void {
     if (this.transaction.getAmount() != '' && this.transaction.getConcept() != '' && this.transaction.getUser() != '') {
       if (this.modify) {
+        //Mantengo la hora antigua al modificar
+        this.transaction.getDate().setHours(this.backupDate.getHours());
+        this.transaction.getDate().setMinutes(this.backupDate.getMinutes());
+        this.transaction.getDate().setSeconds(this.backupDate.getSeconds());
+
         this.transactionsService.updateTransaction(this.transaction.clone()).subscribe(() => this.updateTransaction());
       } else {
         this.transactionsService.newTransaction(this.transaction.clone()).subscribe(() => this.newTransaction());
