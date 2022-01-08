@@ -94,6 +94,10 @@ button:hover {
 
     transition: 1s ease-out;
 }
+.pop-up-container button:only-of-type {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
 .pop-up-container button:first-of-type {
     background-color: var(--main-color);
     border-color: var(--main-color);

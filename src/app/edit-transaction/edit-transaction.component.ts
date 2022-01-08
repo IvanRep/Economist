@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TransactionType } from '../enums/TransactionType.model';
+import { PopUpWindow } from '../popup-window/popup-window.model';
 import { TransactionsService } from '../transactions.service';
 import { Transaction } from '../transactions/transaction.model';
 
@@ -44,7 +45,8 @@ export class EditTransactionComponent implements OnInit {
       
       
     } else {
-      alert('Rellena todos los campos');
+      const popup = new PopUpWindow("Rellena todos los campos",'Hay campos sin rellenar.',() => {},false); 
+      popup.printWindow();
     }
   }
 
