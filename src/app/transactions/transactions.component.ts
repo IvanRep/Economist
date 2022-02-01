@@ -39,12 +39,7 @@ export class TransactionsComponent implements OnInit {
 
   }
 
-  keyDownEvent(event:KeyboardEvent) {  
-    //Pulsar control
-    if (event.ctrlKey) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+  keyDownEvent(event:KeyboardEvent) { 
     
     //Si hay una ventana emergente, sale de la función sin hacer nada
     const popup = (<HTMLDivElement>document.querySelector('div.pop-up-container'));
@@ -55,6 +50,7 @@ export class TransactionsComponent implements OnInit {
     //Mover hacia abajo
     if (event.altKey && event.key == 's' || event.key == 'ArrowDown') {
       event.preventDefault();
+      event.stopPropagation();
       this.restoreTransactionEmitter.emit();
 
       if (this.selectedTransaction >= 0 && this.selectedTransaction < this.transactions.length)
@@ -75,6 +71,7 @@ export class TransactionsComponent implements OnInit {
     //Mover hacia arriba
     if (event.altKey && event.key == 'w' || event.key == 'ArrowUp') {
       event.preventDefault();
+      event.stopPropagation();
       this.restoreTransactionEmitter.emit();
 
       if (this.selectedTransaction >= 0 && this.selectedTransaction < this.transactions.length)

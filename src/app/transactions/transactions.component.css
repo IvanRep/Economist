@@ -10,9 +10,10 @@ main {
 }
 
 .alpha {
-    width: 100%;
+    width: 50vw;
     position: fixed;
     bottom: 0%;
+    right: 10px;
     height: 9vh;
     background: linear-gradient(to bottom,rgba(255,255,255,10%), rgba(255,255,255,70%), rgba(255,255,255,100%));
 

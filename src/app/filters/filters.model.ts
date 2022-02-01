@@ -45,11 +45,11 @@ export class Filters {
     public getStringMaximumAmount():any {
         return this.maximumAmount==999999999 ? '' : this.maximumAmount;
     }
-    public getSince():Date {
+    public getSince():any {
         return this.since;
     }
 
-    public getUntil():Date {
+    public getUntil():any {
         return this.until;
     }
 

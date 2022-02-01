@@ -46,11 +46,6 @@ export class AppComponent {
    */
   checkShortcuts(event:KeyboardEvent) {
     
-    if (event.ctrlKey) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    
     //Si hay una ventana emergente, sale de la función sin hacer nada
      const popup = (<HTMLDivElement>document.querySelector('div.pop-up-container'));
      if (popup) {
@@ -60,10 +55,14 @@ export class AppComponent {
     if (event.altKey && event.key == 'n') {
       this.openNewTransaction();
     }
-    if ((event.altKey || event.altKey) && event.key == 'f') {
+    if ((event.altKey || event.ctrlKey) && event.key == 'f') {
+      event.preventDefault();
+      event.stopPropagation();
       this.openFilters();
     }
     if ((event.altKey || event.ctrlKey) && event.key == 'o') {
+      event.preventDefault();
+      event.stopPropagation();
       this.openOrderBy();
     }
   }
