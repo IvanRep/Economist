@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This project requires connection to an API to communicate with the database: [Economist API](https://github.com/IvanRep/Economist_API)
 
-To indicate the route to the api you have to change the attribute **apiUrl** located in (src/app/transactions.service.ts)
+To indicate the route to the api you have to change the attribute `**apiUrl**` located in `src/app/transactions.service.ts`
 
 ## Development server
 
