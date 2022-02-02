@@ -34,7 +34,8 @@ export class TransactionsBalanceComponent implements OnInit {
   }
 
   getBalance():string {
-    return Intl.NumberFormat('es', {maximumFractionDigits: 2}).format(this.balance);
+    const format = Intl.NumberFormat('es', {maximumFractionDigits: 2, minimumFractionDigits: 2});
+    return format.format(this.balance);
   }
   setBalance(balance:number):void {
     this.balance = balance;

@@ -10,7 +10,7 @@ export class TransactionsService {
 
   private filters:Filters = new Filters();
 
-  private apiUrl = 'http://192.168.1.56/php';
+  private apiUrl = 'http://192.168.1.56/Economist/EconomistAPI/php';
 
 
   constructor(private http: HttpClient) { }
