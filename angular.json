@@ -24,7 +24,8 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/settings.json"
             ],
             "styles": [
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
@@ -93,7 +94,8 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/settings.json"
             ],
             "styles": [
               "src/styles.css"

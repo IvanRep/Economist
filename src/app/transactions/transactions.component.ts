@@ -31,7 +31,14 @@ export class TransactionsComponent implements OnInit {
     this.transactions = [
     ];
 
-    this.getTransactions(this.order,this.orderDirection);
+    //Obtengo del fichero settings la url de la api y se la agrego al transactionService
+    this.transactionsService.getApiUrl().subscribe( (settings:any) => {
+      this.transactionsService.apiUrl = settings.api_url;
+
+      //Listo todas las transacciones
+      this.getTransactions(this.order,this.orderDirection);
+    });
+    
   }
 
   ngOnInit(): void {

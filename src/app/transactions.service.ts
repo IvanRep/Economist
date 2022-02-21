@@ -10,10 +10,20 @@ export class TransactionsService {
 
   private filters:Filters = new Filters();
 
-  private apiUrl = 'http://192.168.1.56/Economist/EconomistAPI/php';
+  apiUrl = '';
 
 
   constructor(private http: HttpClient) { }
+
+  /**
+   * Obtiene un un objeto json con las opciones de configuración
+   * 
+   * @returns json con las opciones de configuración de la app
+   */
+  getApiUrl() {
+    return this.http.get("settings.json",{responseType:"json"});
+  }
+
 
   /**
    * Método utilizado para crear una nueva transacción en la base de datos
