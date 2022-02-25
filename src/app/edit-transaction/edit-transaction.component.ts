@@ -38,9 +38,9 @@ export class EditTransactionComponent implements OnInit {
         this.transaction.getDate().setMinutes(this.backupDate.getMinutes());
         this.transaction.getDate().setSeconds(this.backupDate.getSeconds());
 
-        this.transactionsService.updateTransaction(this.transaction.clone()).subscribe(() => this.updateTransaction());
+        this.transactionsService.updateTransaction(this.transaction.clone()).subscribe(() => this.updateTransaction(),() => this.updateTransaction());
       } else {
-        this.transactionsService.newTransaction(this.transaction.clone()).subscribe(() => this.newTransaction());
+        this.transactionsService.newTransaction(this.transaction.clone()).subscribe(() => this.newTransaction(), () => this.newTransaction());
       }
       
       
