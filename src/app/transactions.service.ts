@@ -32,6 +32,8 @@ export class TransactionsService {
    * 
    */
   newTransaction(transaction:Transaction) {
+    console.warn(transaction)
+
     const headers = new HttpHeaders({ 'Content-Type': 'application/json'});
     const body = JSON.stringify(transaction);
     return this.http.post(this.apiUrl+'/newTransaction.php',body,{headers, responseType: 'json'});

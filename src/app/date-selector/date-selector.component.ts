@@ -22,7 +22,10 @@ export class DateSelectorComponent implements OnInit {
   }
 
   setDate(date:any) {
-    
+    const currentDate = new Date();
+    date.setHours(currentDate.getHours());
+    date.setMinutes(currentDate.getMinutes());
+    date.setSeconds(currentDate.getSeconds());
     this.dateValue = date;
 
     this.dateEmitter.emit(date);
