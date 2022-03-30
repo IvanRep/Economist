@@ -24,7 +24,7 @@ export class AppComponent {
   transactionsVolume:number = 0;
   amountSpend:number = 0;
   enteredAmount:number = 0;
-  order:string = 'Fecha';
+  order:string = 'date';
   orderDirection:string = 'desc';
 
   action:ActionWindow = ActionWindow.None;
