@@ -20,7 +20,7 @@ export class TransactionsComponent implements OnInit {
   @Output() enteredAmountEmitter = new EventEmitter<number>();
   @Output() amountSpendEmitter = new EventEmitter<number>();
 
-  order = 'Fecha';
+  order = 'date';
   orderDirection = 'desc';
 
   selectedTransaction = -1;
