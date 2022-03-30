@@ -77,7 +77,7 @@ export class AppComponent {
 
     const exportDocument = () => {
       const element = document.createElement('a');
-      element.setAttribute('href','http://192.168.1.56/Copias_de_seguridad/'+file.toString());
+      element.setAttribute('href','EconomistAPI/backup/'+file.toString());
       element.setAttribute('download', file);
       document.body.appendChild(element);
       element.click();
