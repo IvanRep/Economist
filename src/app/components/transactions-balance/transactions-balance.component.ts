@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActionWindow } from '../enums/ActionWindow.model';
+import { ActionWindow } from '../../enums/ActionWindow.model';
 
 @Component({
   selector: 'app-transactions-balance',

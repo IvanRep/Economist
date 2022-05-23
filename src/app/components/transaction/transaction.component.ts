@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { TransactionType } from '../enums/TransactionType.model';
+import { TransactionType } from '../../enums/TransactionType.model';
 import { PopUpWindow } from '../popup-window/popup-window.model';
-import { TransactionsService } from '../transactions.service';
-import { Transaction } from '../transactions/transaction.model';
+import { TransactionsService } from '../../services/transactions/transactions.service';
+import { Transaction } from '../../model/transaction.model';
 
 @Component({
   selector: 'app-transaction',

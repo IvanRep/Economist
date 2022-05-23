@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Filters } from './filters/filters.model';
-import { Transaction } from './transactions/transaction.model';
+import { Filters } from '../../model/filters.model';
+import { Transaction } from '../../model/transaction.model';
 
 @Injectable({
   providedIn: 'root'

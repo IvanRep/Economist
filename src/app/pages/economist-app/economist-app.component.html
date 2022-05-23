@@ -1,0 +1,65 @@
+<header>
+    <button (click)="export()">
+      <span class="material-icons">file_upload</span>
+      <div>Exportar</div>
+    </button>
+    <button (click)="openImportWindow()">
+      <span class="material-icons">file_download</span>
+      <div>Importar</div>
+    </button>
+  
+    <div class="nav_menu">
+      <div>{{title}}</div>
+  
+      <div class="order-by" tabindex="1">
+  
+        <button (click)="orderBy($event,transactions)" value="date" disabled>
+          <span class="material-icons">date_range</span>
+        </button>
+        <button (click)="orderBy($event,transactions)" value="type">
+          <span class="material-icons">title</span>
+        </button>
+        <button (click)="orderBy($event,transactions)" value="amount">
+          <span class="material-icons">euro_symbol</span>
+        </button>
+        <button (click)="orderBy($event,transactions)" value="user">
+          <span class="material-icons">people</span>
+        </button>
+    
+      </div>
+    </div>
+    <div>
+      <button class="open_order" (click)="openOrderBy()">
+        <span class="material-icons">search</span>
+      </button>
+      <button class="change_direction desc" (click)="setOrderDirection(transactions)">
+      </button>
+    </div>
+  </header>
+  <main>
+    <!-- Navigation -->
+    <nav>
+      <button (click)="openNewTransaction()">
+        <span class="material-icons">add</span>
+      </button>
+      <button (click)="openFilters()">
+        <span class="material-icons">search</span>
+      </button>
+      <div class="datetime">{{datetime}}</div>
+    </nav>
+    <!-- Action -->
+    <div id="wAction">
+        <div id="action" [ngSwitch]="action" [ngClass]="{'vacio' : action==0}">
+          <app-edit-transaction *ngSwitchCase="1" [modify]="modify" [transaction]="editTransaction" (listTransactionsEmitter)="listTransactions(transactions)" (updateTransactionEmitter)="updateTransaction($event)"></app-edit-transaction>
+          <app-filters *ngSwitchCase="2" (listTransactionsEmitter)="listTransactions(transactions)"></app-filters>
+          <app-import-window *ngSwitchCase="3"></app-import-window>
+        </div>
+        <div id="balance">
+          <app-transactions-balance [balance]="getEnteredAmount()-getAmountSpend()" [amountSpend]="getAmountSpend()" [enteredAmount]="getEnteredAmount()" [transactionsVolume]='getTransactionsVolume()' [action]='getAction()' (openFilters)="openFilters()"></app-transactions-balance>
+        </div>
+    </div>
+    <!-- Transactions -->
+    <div>
+      <app-transactions (restoreTransactionEmitter)="restoreTransaction()" (transactionsEmitter)="openEditTransaction($event)" (amountSpendEmitter)="setAmountSpend($event)" (enteredAmountEmitter)="setEnteredAmount($event)" (transactionsVolumeEmitter)="setTransactionsVolume($event)" #transactions></app-transactions>
+    </div>
+  </main>

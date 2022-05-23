@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { TransactionType } from '../enums/TransactionType.model';
-import { TransactionsService } from '../transactions.service';
+import { TransactionType } from '../../enums/TransactionType.model';
+import { TransactionsService } from '../../services/transactions/transactions.service';
 
 @Component({
   selector: 'app-user-selector',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PopUpWindow } from '../popup-window/popup-window.model';
-import { TransactionsService } from '../transactions.service';
+import { TransactionsService } from '../../services/transactions/transactions.service';
 
 @Component({
   selector: 'app-import-window',

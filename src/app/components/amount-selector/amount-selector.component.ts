@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { TransactionType } from '../enums/TransactionType.model';
+import { TransactionType } from '../../enums/TransactionType.model';
 
 @Component({
   selector: 'app-amount-selector',

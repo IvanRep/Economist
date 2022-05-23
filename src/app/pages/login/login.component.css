@@ -1,0 +1,117 @@
+main {
+    width: 100vw;
+    height: 100vh;
+    background-color: whitesmoke;
+}
+img {
+    width: 50%;
+}
+p {
+    padding-top: 1vh;
+    font-size: calc(.5rem + .75vmin);
+    color: var(--main-color);
+    font-weight: 700;
+}
+form {
+    position: absolute;
+    width: 35vw;
+    height: 75vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    padding: 3%;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    outline: solid 1px darkgray;
+}
+
+input {
+    position: absolute;
+    left: 20%;
+    justify-self: center;
+    margin: auto;
+    width: 60%;
+    border: 1px solid darkgray;
+    border-radius: 1vmin;
+    outline: none;
+    padding: 2vh;
+    background: none;
+    z-index: 1;
+    font-size: calc(.5rem + 1vmin);
+
+}
+input:nth-of-type(1) {
+    top: 20.5vh;
+}
+input:nth-of-type(2) {
+    top: 30.5vh;
+}
+
+label {
+    position: absolute;
+    left: 22%;
+    color: black;
+    background: white;
+    font-size: calc(.5rem + 1vmin);
+    padding: 0 1vmin;
+    margin-bottom: .25rem;
+    transition: .3s;
+}
+label:nth-of-type(1) {
+    top: 22.75vh;
+}
+label:nth-of-type(2) {
+    top: 32.75vh;
+}
+
+
+/* Input focus */
+input:focus, input:not(:placeholder-shown) {
+    border: solid 2px var(--main-color);
+}
+/* Movimiento hacia arriba label*/
+input:focus + label {
+    color: var(--main-color);
+    transform: translateY(-3.5vh);
+    font-size: calc(.75rem + .5vmin);
+    font-weight: 700;
+    z-index: 10;
+}
+
+/* Si hay algo escrito se mantiene la label */
+input:not(:placeholder-shown)+ label {
+    color: var(--main-color);
+    transform: translateY(-3.5vh);
+    font-size: calc(.75rem + .5vmin);
+    font-weight: 700;
+    z-index: 10;
+}
+
+input.login, input.register {
+    background-color: var(--main-color);
+    color: white;
+    width: 10vw;
+    position: absolute;
+    top: 40.5vh;
+    margin: 0;
+}
+input.login {
+    left: 18.1vw;
+}
+
+input.login:hover {
+    filter: brightness(0.9);
+}
+
+input.register {
+    background: none;
+    color: var(--main-color);
+    border-color: white;
+}
+
+input.register:hover {
+    border: solid 1px darkgray;
+}
