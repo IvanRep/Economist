@@ -24,7 +24,7 @@ export class TransactionComponent implements OnInit {
 
   constructor(private transactionsService:TransactionsService) {
     
-    this.transaction = new Transaction('',TransactionType.Other,new Date(),'','','');
+    this.transaction = new Transaction(this.transactionsService.getUser(),'',TransactionType.Other,new Date(),'','','');
 
     this.id = "";
   }

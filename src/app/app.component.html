@@ -1,4 +1,4 @@
 <app-login *ngIf="!user else app" (loginEmitter)="logIn($event)"></app-login>
 <ng-template #app>
-  <app-economist-app></app-economist-app>
+  <app-economist-app [appUser]="user"></app-economist-app>
 </ng-template>

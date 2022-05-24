@@ -5,7 +5,7 @@ import { PopUpWindow } from './components/popup-window/popup-window.model';
 import { TransactionsService } from './services/transactions/transactions.service';
 import { Transaction } from './model/transaction.model';
 import { TransactionsComponent } from './components/transactions/transactions.component';
-import { User } from './model/User.model';
+import { User } from './model/user.model';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +26,7 @@ export class AppComponent {
     
     savedUser = JSON.parse(savedUser);
     this.user = new User(savedUser.username,savedUser.password);
+    this.transactionService.setUser(this.user);
 
   }
 

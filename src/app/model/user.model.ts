@@ -14,5 +14,13 @@ export class User {
         this.password = Md5.hashStr(this.password);
     }
 
+    getUsername():string {
+        return this.username;
+    }
+
+    getPassword():string {
+        return this.password;
+    }
+
 
 }

@@ -7,6 +7,11 @@ header {
     border-bottom: solid var(--main-color);
     align-items: center;
 }
+header div>img {
+    min-width: 40px;
+    width: 600%;
+    max-width: 400px;
+}
 header button {
     display: grid;
     grid-template-columns: 1fr;
@@ -101,12 +106,12 @@ header>div>button:last-child.desc:hover::after {
     grid-template-columns: 3vw 3vw 3vw 3vw;
     column-gap: 1vw;
 
-    transform: translateX(20vw);
-    transition: 2.5s ease-out;
+    transform: translateX(30vw);
+    transition: .5s ease-in-out;
 }
 .order-by.open {
     
-    transform: translateX(0);
+    transform: translateX(12vw);
     
     outline: none;
 }

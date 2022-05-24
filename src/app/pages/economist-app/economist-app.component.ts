@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActionWindow } from '../../enums/ActionWindow.model';
 import { TransactionType } from '../../enums/TransactionType.model';
 import { PopUpWindow } from '../../components/popup-window/popup-window.model';
 import { TransactionsService } from '../../services/transactions/transactions.service';
 import { Transaction } from '../../model/transaction.model';
 import { TransactionsComponent } from '../../components/transactions/transactions.component';
+import { User } from 'src/app/model/user.model';
 
 @Component({
   selector: 'app-economist-app',
@@ -14,9 +15,10 @@ import { TransactionsComponent } from '../../components/transactions/transaction
 export class EconomistAppComponent {
   title = 'Economist';
 
+  @Input() appUser:User = new User('default', 'default');
   //Variable usada para guardar los datos de una transacción que va a ser editada
-  editTransaction:Transaction = new Transaction();
-  backupTransaction:Transaction = new Transaction();
+  editTransaction:Transaction = new Transaction(this.appUser);
+  backupTransaction:Transaction = new Transaction(this.appUser);
   modify:boolean = false;
 
   balanceText = 'El saldo de la cuenta es ';
@@ -38,7 +40,6 @@ export class EconomistAppComponent {
     document.addEventListener('keydown', (event) => {this.checkShortcuts(event)}, false)
 
   }
-
   /**
    * 
    * @param event 
@@ -158,7 +159,7 @@ export class EconomistAppComponent {
     amount>0 ? this.setEnteredAmount(amount) : this.setAmountSpend(-amount);
 
     //Cambio el backup a la nueva transacción que se esta modificando
-    this.backupTransaction = new Transaction(this.editTransaction.getId(),this.editTransaction.getType(),this.editTransaction.getDate(),this.editTransaction.getConcept(),this.editTransaction.getUser(),this.editTransaction.getAmount());
+    this.backupTransaction = new Transaction(this.appUser,this.editTransaction.getId(),this.editTransaction.getType(),this.editTransaction.getDate(),this.editTransaction.getConcept(),this.editTransaction.getUser(),this.editTransaction.getAmount());
     this.action = ActionWindow.None;  
   }
 
@@ -174,8 +175,8 @@ export class EconomistAppComponent {
     }
 
     //Reseteo la transacción a editar y el backup por si se ha seleccionado alguna
-    this.editTransaction = new Transaction();
-    this.backupTransaction = new Transaction();
+    this.editTransaction = new Transaction(this.appUser);
+    this.backupTransaction = new Transaction(this.appUser);
     
   }
 
@@ -189,7 +190,7 @@ export class EconomistAppComponent {
     
     this.action = ActionWindow.NewTransaction;
     this.editTransaction = transaction;
-    this.backupTransaction = new Transaction(transaction.getId(),transaction.getType(),transaction.getDate(),transaction.getConcept(),transaction.getUser(),transaction.getAmount());
+    this.backupTransaction = new Transaction(this.appUser,transaction.getId(),transaction.getType(),transaction.getDate(),transaction.getConcept(),transaction.getUser(),transaction.getAmount());
     this.modify = true;
   }
 

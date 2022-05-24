@@ -15,7 +15,7 @@ export class EditTransactionComponent implements OnInit {
   @Output() listTransactionsEmitter:EventEmitter<void> = new EventEmitter<void>();
   @Output() updateTransactionEmitter:EventEmitter<number> = new EventEmitter<number>();
 
-  @Input() transaction:Transaction = new Transaction();
+  @Input() transaction:Transaction = new Transaction(this.transactionsService.getUser());
 
   @Input() modify:boolean = false;
   backupDate:Date = new Date();

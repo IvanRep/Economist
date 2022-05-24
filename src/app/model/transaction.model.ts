@@ -1,4 +1,5 @@
 import { TransactionType } from "../enums/TransactionType.model";
+import { User } from "./user.model";
 
 export class Transaction {
 
@@ -9,8 +10,9 @@ export class Transaction {
     user:string;
     private amount:string;
     selected:boolean
+    private appUser:User;
 
-    constructor(id:string = '', type:TransactionType = TransactionType.Deposit, date:any = new Date(), concept:string = '', user:string = '', amount:string = '', selected:boolean = false) {
+    constructor(appUser:User,id:string = '', type:TransactionType = TransactionType.Deposit, date:any = new Date(), concept:string = '', user:string = '', amount:string = '', selected:boolean = false) {
         this.id = id;
         this.type = type;
         this.date = date;
@@ -18,11 +20,12 @@ export class Transaction {
         this.user = user;
         this.amount = amount;
         this.selected = selected;
+        this.appUser = appUser;
     }
 
     public clone():Transaction {
 
-      return new Transaction(this.id,this.type,this.date,this.concept,this.user,this.amount);
+      return new Transaction(this.appUser,this.id,this.type,this.date,this.concept,this.user,this.amount);
     }
 
     public clear() {

@@ -141,7 +141,7 @@ export class TransactionsComponent implements OnInit {
       const dateSplitted = transaction.date.split("/");
       const date = new Date(parseInt(dateSplitted[2]),parseInt(dateSplitted[1])-1,parseInt(dateSplitted[0]),parseInt(dateSplitted[3]),parseInt(dateSplitted[4]),parseInt(dateSplitted[5]));
       setTimeout(() => {
-        this.transactions.push(new Transaction(transaction.id,transaction.type, date, transaction.concept, transaction.user, transaction.amount))
+        this.transactions.push(new Transaction(this.transactionsService.getUser(),transaction.id,transaction.type, date, transaction.concept, transaction.user, transaction.amount))
         this.emitTransactionsVolume(this.transactions.length);
       },100);
     }
