@@ -123,7 +123,18 @@ export class Transaction {
           default:
             return (this.date.getMonth()+1).toString();
         }
-      }
+    }
+
+    normalizeDate() {
+        const day = this.date.getDate() <= 9 ? '0'+this.date.getDate() : this.date.getDate();
+        const month = (this.date.getMonth()) < 9 ? '0'+(this.date.getMonth()+1) : (this.date.getMonth()+1);
+        const hours = this.date.getHours() <= 9 ? '0'+this.date.getHours() : this.date.getHours();
+        const min = this.date.getMinutes() <= 9 ? '0'+this.date.getMinutes() : this.date.getMinutes();
+        const sec = this.date.getSeconds() <= 9 ? '0'+this.date.getSeconds() : this.date.getSeconds();
+  
+        this.date = day+'-'+month+'-'+this.date.getFullYear()+' '+hours+':'+min+':'+sec;
+    }
+  
 
     public getConcept():string {
         return this.concept;

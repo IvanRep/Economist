@@ -1,7 +1,7 @@
 input {
 
     border: solid 2px var(--main-color);
-    border-radius: 50px;
+    border-radius: 15px;
     outline: none;
     text-align: center;
     color: var(--main-color);
@@ -10,19 +10,63 @@ input {
     width: 100%;
     align-self: center;
 }
+input.deployed {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
 
 input::placeholder {
     font-weight: lighter;
     color: var(--main-color);
 }
 
-input.deposit ~ datalist {
-    color: var(--deposit-color);
-}
-
 input.deposit, input.deposit::placeholder {
     border-color: var(--deposit-color);
     color: var(--deposit-color);
+}
 
-    transition: 1.5s;
+.suggestions {
+    position: absolute;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: white;
+    overflow: hidden;
+    z-index: 99;
+    visibility: hidden;
+    opacity: 0;
+    box-shadow: 0 10px 20px -8px rgba(0, 0, 0) !important;
+}
+.suggestions.deployed {
+    visibility: visible;
+    opacity: 1;
+}
+
+.suggestions ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.suggestions li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1vh;
+    padding-left: 0px;
+    cursor: pointer;
+    color: var(--main-color);
+    
+}
+.suggestions.deposit li {
+    color: var(--deposit-color);
+} 
+.suggestions li:hover, .suggestions li:focus  {
+    background-color: var(--main-color);
+    color: white;
+    outline: none;
+}
+.suggestions.deposit li:hover, .suggestions.deposit li:focus  {
+    background-color: var(--deposit-color);
+    color: white;
+    outline: none;
 }

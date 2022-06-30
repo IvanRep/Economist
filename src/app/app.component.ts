@@ -25,7 +25,7 @@ export class AppComponent {
       return
     
     savedUser = JSON.parse(savedUser);
-    this.user = new User(savedUser.username,savedUser.password);
+    this.user = new User(savedUser.username,savedUser.password,savedUser.type);
     this.transactionService.setUser(this.user);
 
   }
@@ -33,6 +33,8 @@ export class AppComponent {
   logIn(user:User) {
 
     this.user = user;
+    this.transactionService.setUser(user);
+    localStorage.setItem('user',JSON.stringify(user));
 
   }
 

@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild, ViewRef } from '@angular/core';
-import { User } from '../../model/User.model';
+import { UsersService } from 'src/app/services/users/users.service';
+import { User } from '../../model/user.model';
 
 @Component({
   selector: 'app-login',
@@ -14,16 +15,15 @@ export class LoginComponent implements OnInit {
   @ViewChild('password') password!:ElementRef;
 
   @Output() loginEmitter:EventEmitter<User> = new EventEmitter<User>();
-  @Output() registerEmitter:EventEmitter<User> = new EventEmitter<User>(); 
 
-  constructor() { }
+  constructor(private usersService:UsersService) { }
 
   ngOnInit(): void {
   }
 
-    /**
-   * Gets the user data from the form inputs, hash the password and saves them in localStorage  
-   */
+  /**
+  * Gets the user data from the form inputs, hash the password and saves them in localStorage  
+  */
   saveUser() {
     const username = (<HTMLInputElement>this.username.nativeElement).value;
     
@@ -39,8 +39,6 @@ export class LoginComponent implements OnInit {
 
     const user = new User(username, password);
     user.hashPassword();
-
-    localStorage.setItem('user',JSON.stringify(user));
 
     return user;
   }
@@ -59,12 +57,21 @@ export class LoginComponent implements OnInit {
       this.error = "La contraseña contiene carácteres inválidos";
       return;
     }
-    this.loginEmitter.emit(user);
+
+    try {
+      console.table(user);
+      this.usersService.getUser(user).subscribe(response => {
+        this.loginEmitter.emit(user);
+
+      });
+    } catch(error) {
+      console.table(error);
+    }
   }
 
     /**
    * Gets the user data from the form inputs (hash the password), saves them in localStorage 
-   * and sends an event whith the user to register him. 
+   * and sends an event whith the user to log in. 
    */
   register() {
     const user = this.saveUser();
@@ -76,7 +83,15 @@ export class LoginComponent implements OnInit {
       this.error = "La contraseña contiene carácteres inválidos";
       return;
     }
-    this.registerEmitter.emit(user);
+
+    try {
+      this.usersService.registerUser(user).subscribe(response => {
+
+        this.loginEmitter.emit(user);
+      });
+    } catch(error) {
+      console.table(error);
+    }
   }
 
 }

@@ -9,6 +9,8 @@ import { Transaction } from '../../model/transaction.model';
 })
 export class TransactionsService {
 
+  transactions:Transaction[] = [];
+
   private user:User = new User('default', 'default');
   private filters:Filters = new Filters();
 
@@ -26,7 +28,6 @@ export class TransactionsService {
     return this.http.get("settings.json",{responseType:"json"});
   }
 
-
   /** C
    * Método utilizado para crear una nueva transacción en la base de datos
    * 
@@ -35,9 +36,11 @@ export class TransactionsService {
    */
   newTransaction(transaction:Transaction) {
 
-    console.table(transaction);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json'});
-    const body = JSON.stringify({transaction});
+    const transactionClone = transaction.clone();
+    transactionClone.normalizeDate();
+    const body = JSON.stringify([transactionClone]);
+    console.table(body);
     return this.http.post(this.apiUrl+'/trade',body,{headers, responseType: 'json'});
   }
 
@@ -49,10 +52,13 @@ export class TransactionsService {
    */
   updateTransaction(transaction:Transaction) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json'});
-    const params = new HttpParams();
-    params.append('username', this.user.getUsername());
-    params.append('password', this.user.getPassword());
-    const body = JSON.stringify(transaction);
+    const params = new HttpParams()
+    .set('username', this.user.getUsername())
+    .set('password', this.user.getPassword());
+
+    const transactionClone = transaction.clone();
+    transactionClone.normalizeDate();
+    const body = JSON.stringify([transactionClone]);
     return this.http.put(this.apiUrl+'/trade',body,{params,headers, responseType: 'json'});
   }
   /** C
@@ -62,9 +68,9 @@ export class TransactionsService {
    * 
    */
   deleteTransaction(id:string) {
-    const params = new HttpParams();
-    params.append('username', this.user.getUsername());
-    params.append('password', this.user.getPassword());
+    const params = new HttpParams()
+    .set('username', this.user.getUsername())
+    .set('password', this.user.getPassword())
     return this.http.delete(this.apiUrl+'/trade/'+id,{params});
   }
 
@@ -91,21 +97,21 @@ export class TransactionsService {
    * @returns {{'id': 2312,'type': '', 'date': '', 'amount': 1231, 'user': '', 'concept': ''},...}
    */
   getAllTransactions(order:string, orderDirection:string) {
-
-    const params = new HttpParams();
-    params.append('username', this.user.getUsername());
-    params.append('password', this.user.getPassword());
-    params.append('min', this.filters.getMinimumAmount());
-    params.append('max', this.filters.getMaximumAmount());
-    params.append('since', this.filters.getSince());
-    params.append('until', this.filters.getUntil());
-    if (this.filters.getType() != 'Todos') params.append('type', this.filters.getType());
-    params.append('user', this.filters.getUser());
-    params.append('concept', this.filters.getConcept());
-    params.append('orderBy', order);
-    params.append('orderType', orderDirection);
-    params.append('dateFormat', 'dd/MM/yyyy/HH/mm/ss');
     
+    const params = new HttpParams()
+    .set('username', this.user.getUsername())
+    .set('password', this.user.getPassword())
+    .set('min', this.filters.getMinimumAmount())
+    .set('max', this.filters.getMaximumAmount())
+    .set('since', this.filters.getFormattedSince())
+    .set('until', this.filters.getFormattedUntil())
+    .set('user', this.filters.getUser())
+    .set('concept', this.filters.getConcept())
+    .set('orderBy', order)
+    .set('orderType', orderDirection)
+    .set('dateFormat', 'dd/MM/yyyy/HH/mm/ss')
+    .set('type', this.filters.getType() != 'Todos' ? this.filters.getType() : '');
+    console.log(this.user.getPassword())
     return this.http.get(this.apiUrl+'/trade',{params,responseType: 'json'});
   }
 
@@ -116,10 +122,10 @@ export class TransactionsService {
    */
   getTransaction(id:string) {
 
-    const params = new HttpParams();
-    params.append('username', this.user.getUsername());
-    params.append('password', this.user.getPassword());
-    params.append('dateFormat', 'dd/MM/yyyy/HH/mm/ss');
+    const params = new HttpParams()
+    .set('username', this.user.getUsername())
+    .set('password', this.user.getPassword())
+    .set('dateFormat', 'dd/MM/yyyy/HH/mm/ss')
 
     return this.http.get(this.apiUrl+'/trade/'+id,{params,responseType: 'json'});
   }
@@ -132,14 +138,15 @@ export class TransactionsService {
     return this.http.get(this.apiUrl+'/listar_archivos.php',{responseType: 'json'});
   }
   /**
-   * Listas todos los usuarios que hayan hecho una transacción con el tipo indicado y su nombre contenga el user pasado como parametro
-   * @param user (string  con el texto que tiene que contener el nombre de los usuarios listados)
-   * @param type (string con el tipo de la transacción en la que se quiere buscar a los usuarios)
+   * @param field 
    * @returns {'string','string',...}
    */
-  getUsers(user:string, type:string) {
-
-    return this.http.get(this.apiUrl+'/getUsers.php?user='+user+'&type='+type,{responseType: 'json'});
+  getSuggest(field:string) {
+    const params = new HttpParams()
+    .set('username', this.user.getUsername())
+    .set('password', this.user.getPassword())
+    .set('field', field)
+    return this.http.get(this.apiUrl+'/trade/suggest',{params,responseType: 'json'});
   }
   /**
    * Guarda una copia de seguridad con todos los datos de la base de datos en el servidor

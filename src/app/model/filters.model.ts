@@ -48,9 +48,26 @@ export class Filters {
     public getSince():any {
         return this.since;
     }
+    public getFormattedSince():any {
+        if (!(this.since instanceof Date))
+            return '';
+        const day = (this.since.getDate() < 9) ? '0'+this.since.getDate() : this.since.getDate();
+        const month = (this.since.getMonth() < 9) ? '0'+(this.since.getMonth()+1) : (this.since.getMonth()+1);
+        const year = this.since.getFullYear();
+        return  day+'/'+month+'/'+year;
+    }
 
     public getUntil():any {
         return this.until;
+    }
+
+    public getFormattedUntil():any {
+        if (!(this.until instanceof Date))
+            return '';
+        const day = (this.until.getDate() < 9) ? '0'+this.until.getDate() : this.until.getDate();
+        const month = (this.until.getMonth() < 9) ? '0'+(this.until.getMonth()+1) : (this.until.getMonth()+1);
+        const year = this.until.getFullYear();
+        return  day+'/'+month+'/'+year;
     }
 
     public getConcept():string {

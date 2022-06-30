@@ -7,7 +7,7 @@
         <label for="user">Usuario</label>
         <input #password name="password" placeholder=" " autocomplete="off"/>
         <label for="password">Contraseña</label>
-        <input class="register" type="submit" value="Crear Cuenta" />
+        <input class="register" type="submit" value="Crear Cuenta" (click)="register()" />
         <input class="login" type="submit" value="Continuar" (click)="logIn()"/>
     </form>
 </main>

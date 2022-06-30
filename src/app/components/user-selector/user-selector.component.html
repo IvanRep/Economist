@@ -1,10 +1,19 @@
-<input type="text" #userInput [value]="user"
-    [ngClass]="{'deposit' : type == transactionType.Deposit}" 
+<input #userInput type="text"  [value]="user"
+    [ngClass]="{'deposit' : type == transactionType.Deposit, 'deployed':deployed}" 
     (input)="inputUser(userInput.value)"
-    (focus)="autocompleteUsers(userInput.value)" 
-    placeholder="{{type == transactionType.Deposit ? 'Usuario' : 'Beneficiario'}}"
-    list="users">
+    (focus)="getAllUsers()"
+    (blur)="hideSuggestions()"
+    placeholder="{{type == transactionType.Deposit ? 'Usuario' : 'Beneficiario'}}">
 
-<datalist id="users">
-    <option *ngFor="let user of arrayUsers" value="{{user}}">
-</datalist>
+<div #userSuggestions class="suggestions" [ngClass]="{'deployed':deployed, 'deposit': type == transactionType.Deposit}" >
+    <ul>
+        <li *ngFor="let user of displayedUsers" 
+            (click)="setSuggestion(user)" 
+            (blur)="hideSuggestions()"
+            tabindex="0">
+                
+                {{user}}
+
+        </li> 
+    </ul>
+</div>

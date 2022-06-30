@@ -28,8 +28,7 @@ export class TransactionsComponent implements OnInit {
 
   constructor(private transactionsService:TransactionsService) { 
     this.title = 'Transacciones Realizadas';
-    this.transactions = [
-    ];
+    this.transactions = [];
 
     //Obtengo del fichero settings la url de la api y se la agrego al transactionService
     this.transactionsService.getApiUrl().subscribe( (settings:any) => {
@@ -129,7 +128,7 @@ export class TransactionsComponent implements OnInit {
   }
 
   getTransactions(order:string = this.order, orderDirection:string = this.orderDirection) {
-    this.transactions = [];
+    this.transactions = []
     this.order = order;
     this.orderDirection = orderDirection;
     //this.transactionsService.getTransactionsID(order, orderDirection).subscribe(result => this.createTransactions(result));
@@ -137,14 +136,17 @@ export class TransactionsComponent implements OnInit {
   }
 
   createTransactions(result:any) {
+    
+    this.transactionsService.transactions = [];
     for (let transaction of result) {
       const dateSplitted = transaction.date.split("/");
       const date = new Date(parseInt(dateSplitted[2]),parseInt(dateSplitted[1])-1,parseInt(dateSplitted[0]),parseInt(dateSplitted[3]),parseInt(dateSplitted[4]),parseInt(dateSplitted[5]));
       setTimeout(() => {
-        this.transactions.push(new Transaction(this.transactionsService.getUser(),transaction.id,transaction.type, date, transaction.concept, transaction.user, transaction.amount))
+        this.transactionsService.transactions.push(new Transaction(this.transactionsService.getUser(),transaction.id,transaction.type, date, transaction.concept, transaction.user, transaction.amount))
         this.emitTransactionsVolume(this.transactions.length);
       },100);
     }
+    this.transactions = this.transactionsService.transactions;
     
   }
 

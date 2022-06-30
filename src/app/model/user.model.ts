@@ -4,10 +4,12 @@ export class User {
 
     private username:string;
     private password:string;
+    private type:string;
 
-    constructor(username:string, password:string) {
+    constructor(username:string, password:string, type:string = "admin") {
         this.username = username;
         this.password = password;
+        this.type = type
     }
 
     public hashPassword():void {
@@ -20,6 +22,10 @@ export class User {
 
     getPassword():string {
         return this.password;
+    }
+
+    getType():string {
+        return this.type;
     }
 
 
