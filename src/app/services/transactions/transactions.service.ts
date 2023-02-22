@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { User } from 'src/app/model/user.model';
 import { Filters } from '../../model/filters.model';
 import { Transaction } from '../../model/transaction.model';
+import Utils from 'src/app/utils/utils';
+import settings from '../../../settings.json';
 
 @Injectable({
   providedIn: 'root'
@@ -16,23 +18,15 @@ export class TransactionsService {
 
   apiUrl = '';
 
-
-  constructor(private http: HttpClient) { }
-
-  /**
-   * Obtiene un un objeto json con las opciones de configuración
-   * 
-   * @returns json con las opciones de configuración de la app
-   */
-  getApiUrl() {
-    return this.http.get("settings.json",{responseType:"json"});
+  constructor(private http: HttpClient) {
+    this.apiUrl = Utils.checkUrl(settings.api_url);
   }
 
   /** C
    * Método utilizado para crear una nueva transacción en la base de datos
-   * 
+   *
    * @param transaction (Transaction que se va a añadir a la base de datos)
-   * 
+   *
    */
   newTransaction(transaction:Transaction) {
 
@@ -46,9 +40,9 @@ export class TransactionsService {
 
   /** C
    * Método utilizado para modificar los datos de una transacción en la base de datos
-   * 
+   *
    * @param transaction (Transaction con los datos de la transacción que se va a modificar en la base de datos)
-   * 
+   *
    */
   updateTransaction(transaction:Transaction) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json'});
@@ -63,9 +57,9 @@ export class TransactionsService {
   }
   /** C
    * Método utilizado para eliminar una transacción de la base de datos
-   * 
+   *
    * @param id (id de la transacción que se va a eliminar)
-   * 
+   *
    */
   deleteTransaction(id:string) {
     const params = new HttpParams()
@@ -77,7 +71,7 @@ export class TransactionsService {
   /**
    * UNUSED
    * Devuelve el id de todas las transacciones de la base de datos
-   * 
+   *
    * @param order (string indicando el campo por el cual se van a ordenar las transacciones)
    * @param orderDirection (string asc o desc indicando la dirección en la que se ordenaran las transacciones)
    * @returns {{'id': 1232},{'id': 1232}...}
@@ -85,19 +79,19 @@ export class TransactionsService {
   getTransactionsID(order:string, orderDirection:string) {
 
     const jsonFilters = JSON.stringify(this.filters);
-    
+
     return this.http.get(this.apiUrl+'/listarId.php?filters='+jsonFilters+'&order='+order+'&orderDirection='+orderDirection,{responseType: 'json'});
   }
 
  /** C
    * Devuelve todos los datos de todas las transacciones de la base de datos
-   * 
+   *
    * @param order (string indicando el campo por el cual se van a ordenar las transacciones)
    * @param orderDirection (string asc o desc indicando la dirección en la que se ordenaran las transacciones)
    * @returns {{'id': 2312,'type': '', 'date': '', 'amount': 1231, 'user': '', 'concept': ''},...}
    */
   getAllTransactions(order:string, orderDirection:string) {
-    
+
     const params = new HttpParams()
     .set('username', this.user.getUsername())
     .set('password', this.user.getPassword())
@@ -111,7 +105,7 @@ export class TransactionsService {
     .set('orderType', orderDirection)
     .set('dateFormat', 'dd/MM/yyyy/HH/mm/ss')
     .set('type', this.filters.getType() != 'Todos' ? this.filters.getType() : '');
-    console.log(this.user.getPassword())
+
     return this.http.get(this.apiUrl+'/trade',{params,responseType: 'json'});
   }
 
@@ -138,7 +132,7 @@ export class TransactionsService {
     return this.http.get(this.apiUrl+'/listar_archivos.php',{responseType: 'json'});
   }
   /**
-   * @param field 
+   * @param field
    * @returns {'string','string',...}
    */
   getSuggest(field:string) {
@@ -150,7 +144,7 @@ export class TransactionsService {
   }
   /**
    * Guarda una copia de seguridad con todos los datos de la base de datos en el servidor
-   * 
+   *
    */
   exportDatabase() {
 

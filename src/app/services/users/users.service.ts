@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/model/user.model';
+import Utils from 'src/app/utils/utils';
 import * as data from '../../../settings.json';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class UsersService {
 
   constructor(private http: HttpClient) {
     const settings = data;
-    this.apiUrl = settings.api_url;
+    this.apiUrl = Utils.checkUrl(settings.api_url);
   }
 
   registerUser(user:User) {
@@ -25,7 +26,7 @@ export class UsersService {
     var params = new HttpParams()
     .set('username',user.getUsername())
     .set('password',user.getPassword())
-    
+
     return this.http.get(this.apiUrl+'/user/check',{params});
   }
 

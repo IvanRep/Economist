@@ -26,18 +26,13 @@ export class TransactionsComponent implements OnInit {
   selectedTransaction = -1;
   controlKeyDown:boolean = false;
 
-  constructor(private transactionsService:TransactionsService) { 
+  constructor(private transactionsService:TransactionsService) {
     this.title = 'Transacciones Realizadas';
     this.transactions = [];
 
-    //Obtengo del fichero settings la url de la api y se la agrego al transactionService
-    this.transactionsService.getApiUrl().subscribe( (settings:any) => {
-      this.transactionsService.apiUrl = settings.api_url;
+    //Listo todas las transacciones
+    this.getTransactions(this.order,this.orderDirection);
 
-      //Listo todas las transacciones
-      this.getTransactions(this.order,this.orderDirection);
-    });
-    
   }
 
   ngOnInit(): void {
@@ -45,8 +40,8 @@ export class TransactionsComponent implements OnInit {
 
   }
 
-  keyDownEvent(event:KeyboardEvent) { 
-    
+  keyDownEvent(event:KeyboardEvent) {
+
     //Si hay una ventana emergente, sale de la función sin hacer nada
     const popup = (<HTMLDivElement>document.querySelector('div.pop-up-container'));
     if (popup) {
@@ -107,7 +102,6 @@ export class TransactionsComponent implements OnInit {
     if (event.key == 'Backspace' || event.key == 'Delete') {
       (<HTMLButtonElement>document.querySelector('.options.selected>button:last-of-type'))?.click();
     }
-    console.log(event.key);
   }
 
   selectTransaction(transaction:Transaction) {
@@ -136,7 +130,7 @@ export class TransactionsComponent implements OnInit {
   }
 
   createTransactions(result:any) {
-    
+
     this.transactionsService.transactions = [];
     for (let transaction of result) {
       const dateSplitted = transaction.date.split("/");
@@ -147,7 +141,7 @@ export class TransactionsComponent implements OnInit {
       },100);
     }
     this.transactions = this.transactionsService.transactions;
-    
+
   }
 
   setBalance(amount:number) {

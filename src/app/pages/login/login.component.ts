@@ -22,11 +22,11 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-  * Gets the user data from the form inputs, hash the password and saves them in localStorage  
+  * Gets the user data from the form inputs, hash the password and saves them in localStorage
   */
   saveUser() {
     const username = (<HTMLInputElement>this.username.nativeElement).value;
-    
+
     if (username.includes('"') || username.includes("'")) {
       return -1;
     }
@@ -44,8 +44,8 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * Gets the user data from the form inputs (hash the password), saves them in localStorage 
-   * and sends an event whith the user to log in. 
+   * Gets the user data from the form inputs (hash the password), saves them in localStorage
+   * and sends an event whith the user to log in.
    */
   logIn() {
     const user = this.saveUser();
@@ -59,7 +59,6 @@ export class LoginComponent implements OnInit {
     }
 
     try {
-      console.table(user);
       this.usersService.getUser(user).subscribe(response => {
         this.loginEmitter.emit(user);
 
@@ -70,8 +69,8 @@ export class LoginComponent implements OnInit {
   }
 
     /**
-   * Gets the user data from the form inputs (hash the password), saves them in localStorage 
-   * and sends an event whith the user to log in. 
+   * Gets the user data from the form inputs (hash the password), saves them in localStorage
+   * and sends an event whith the user to log in.
    */
   register() {
     const user = this.saveUser();
