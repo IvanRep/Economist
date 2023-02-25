@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/model/user.model';
-import { Filters } from '../../model/filters.model';
-import { Transaction } from '../../model/transaction.model';
+import { Filters } from 'src/app/model/filters.model';
+import { Transaction } from 'src/app/model/transaction.model';
 import Utils from 'src/app/utils/utils';
-import settings from '../../../settings.json';
+import settings from 'src/settings.json';
 
 @Injectable({
   providedIn: 'root'
